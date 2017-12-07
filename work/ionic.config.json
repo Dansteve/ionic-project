@@ -1,0 +1,15 @@
+{
+    "name": "social-network",
+    "app_id": "9ddc1f42",
+    "type": "ionic1",
+    "integrations": {
+        "gulp": {},
+        "cordova": {}
+    },
+    "watchPatterns": [
+        "scss/**/*",
+        "www/**/*",
+        "!www/lib/**/*",
+        "!www/**/*.map"
+    ]
+}

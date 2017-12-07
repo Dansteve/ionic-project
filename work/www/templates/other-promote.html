@@ -1,0 +1,91 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="Promote">
+    <ion-floating-button ng-click="modal.show()" has-footer="false" button-color="#2AC9AA" icon="ion-plus" icon-color="#fff">
+    </ion-floating-button>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-trash-outline" ng-click="showdelete()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="center" ng-show="
+(promotelist | filter : {name : 'demo'} | numKeys ) == 0" style="padding-top: 50%;">
+            <h2>Welcome to Social Promote</h2>
+            <p class="center">You don't have any link to promote to ;<br> Add a promotion link use the add button </p>
+        </div>
+
+        <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
+            <ion-item class="item item-divider center" ng-hide="(promotelist | filter : {name : 'demo'} | numKeys ) == 0">Promote Link List (note - side to edit)</ion-item>
+            <ion-item ng-repeat="promote in promotelist | filter : {name : 'demo'}" class="item-thumbnail-left">
+                <img ng-src="img/{{promote.social | lowercase}}.png">
+                <h2>{{promote.title}}</h2>
+                <p> Desc : {{promote.description}}</p>
+                <p> link : {{promote.link}}</p>
+                <p> coins : {{promote.coins}}</p>
+                <ion-option-button class="button-positive" ng-click="share(item)">
+                    Share
+                </ion-option-button>
+                <ion-option-button class="button-info" ng-click="edit(item)">
+                    Edit
+                </ion-option-button>
+                <ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)">
+                </ion-delete-button>
+            </ion-item>
+        </ion-list>
+
+        <script id="templates/promote-form.html" type="text/ng-template">
+            <ion-modal-view ng-class="{'full': true}">
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h2 class="title">Enter New URL</h2>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                </ion-header-bar>
+                <ion-content class="padding">
+                    <h2 class="promote-header center" id="promote-header" style="padding: 0;margin: 0">Promote Your Url</h2>
+                    <div class="list">
+                        <div class="center"><img src="img/social-media-circle.png" height="300vh"> </div>
+                        <form name="myForm">
+                            <label class="item item-input item-select">
+                            <div class="input-label">
+                              Social Media
+                            </div>
+                            <select required ng-model="promote.social">
+                              <option ng-repeat="social in socialLists">{{social.name}}</option>
+                            </select>
+                          </label>
+
+                            <label class="item item-input">
+                            <span class="input-label">Enter Title :</span>
+                          <input ng-model="promote.title" type="text" required>
+                        </label>
+                            <label class="item item-input">
+                                <textarea ng-model="promote.description" type="text" required placeholder="Enter Description" rows="5"></textarea>
+                        </label>
+                            <label class="item item-input">
+                            <span class="input-label">Enter Url :</span>
+                          <input ng-model="promote.url" type="url" required>
+                        </label>
+                            <label class="item item-input">
+                            <span class="input-label">Enter Coins :</span>
+                          <input ng-model="promote.coins" type="number" required id="p.coins" class="coins">
+                        </label>
+                            <button class="button button-full button-positive" type="Submit" ng-click="promoteAdd(promote.title,promote.description,promote.social,promote.url,promote.coins);modal.hide();" ng-disabled="!promote.social  || !promote.title || !promote.description || !promote.url || !promote.coins ">Submit</button>
+                            <button class="button button-full button-stable" ng-click="modal.hide();">Cancel</button>
+                        </form>
+                    </div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

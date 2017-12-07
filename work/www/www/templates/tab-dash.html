@@ -1,0 +1,53 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="Dashboard">
+    <ion-content style="background: rgba(56, 126, 245, 0.09);">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <div ng-repeat="data in feedData">
+            <div class="list card">
+                <div class="item item-avatar">
+                    <img ng-src="{{data.mypicture}}">
+                    <h2>{{data.from.name}}</h2>
+                    <p>{{data.created_time}}</p>
+                </div>
+                <div class="item item-body">
+                    <img ng-src="{{data.message.img}}" class="full-image" ng-if="data.message.img">
+                    <a ng-if="data.message.video">
+                        <div class="row zero-padding" class="zero-padding">
+                            <div class="col zero-padding" class="zero-padding">
+                                <div class="video-container">
+                                    <iframe ng-src="{{trustSrc(data.message.video)}}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <p>
+                        {{data.message.text}}
+                    </p>
+                    <p>
+                        <a class="subdued">{{data.likes.data.length}} Likes</a>
+                        <a class="subdued">{{data.comments.data.length}} Comments</a>
+                    </p>
+                </div>
+                <div class="item tabs  tabs-icon-left" style="-webkit-transform:none !important">
+                    <a class="tab-item">
+                        <i class="icon ion-thumbsup"></i>
+                        Like
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-chatbox"></i>
+                        Comment
+                    </a>
+                    <a class="tab-item">
+                        <i class="icon ion-share"></i>
+                        Share
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

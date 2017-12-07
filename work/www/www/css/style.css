@@ -1,0 +1,151 @@
+/*
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+*/
+
+.swiper-pagination.swiper-pagination-clickable {
+        display: none; !important;
+}
+.box {
+    height: 100% !important;
+    width: auto !important;
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.login {
+    background-color: #0a9dc7 !important;
+    background: url(../img/login.jpg) !important;
+}
+
+.white {
+    background: white !important;
+}
+
+.login-padding {
+    padding-top: 35% !important;
+}
+
+.login-form {
+    border-radius: 50px !important;
+    margin: 10px !important;
+    color: rgb(80, 58, 17) !important;
+}
+
+.profile {
+    border-radius: 50%;
+    height: 100px;
+    width: initial !important;
+    text-align: center !important;
+}
+
+.profile-mean {
+    border-radius: 50%;
+    width: 170px !important;
+    text-align: center !important;
+}
+
+#profile-head {
+    height: 150px !important;
+    background: url(../img/group.jpg) !important;
+    filter: grayscale(100%) !important;
+    background-size: cover !important;
+}
+
+a#now,
+.now {
+    border: none;
+    border-radius: 119% !important;
+    width: fit-content !important;
+    top: calc(-60px) !important;
+    left: calc(30%) !important;
+    padding: 5px !important;
+}
+
+.new-now {
+    border: none;
+    border-radius: 50px !important;
+    width: fit-content !important;
+    top: calc(-60px) !important;
+    left: calc(30%) !important;
+    padding: 5px !important;
+}
+
+#profile-details,
+.profile-details {
+    text-align: center !important;
+    margin-top: -50px !important;
+}
+
+#name {
+    font-size: 1.3rem !important;
+}
+#child{
+    font-family: cursive !important;
+}
+#sidebar{
+    background: #fafafa;
+}
+.spinner svg {
+     width: 15%;
+    height: auto;
+    stroke: #ff4a4a;
+    fill: #0c60ee;
+}
+.show{
+    visibility: hidden;
+    display: none;
+}
+.loader{
+    margin-top: 50%;
+    z-index: 199999999;
+    text-align: center;
+    position: relative;
+}
+.cover{
+    background: rgba(255, 255, 255, 0.50);
+    position: absolute;
+    height: calc(100%);
+    z-index: 100;
+    width: 100%;
+}
+[nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
+    background: #387ef5 !important;
+}
+.center{
+    text-align: center !important;
+}
+label.icon-left.item.item-radio {
+    border: 0;
+}
+.full{
+        width: 100%;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+.video-container {
+position: relative;
+padding-bottom: 74.25%; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.zero-padding{
+    padding: 0;
+}
+.list:last-child.card {
+    margin-bottom: 0px !important;
+}

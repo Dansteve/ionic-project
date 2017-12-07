@@ -1,0 +1,27 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="Chats">
+    <ion-content>
+        <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+        <div class="list">
+            <ion-item class="item-remove-animate item-avatar item-icon-right item-text-wrap" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+                <img ng-src="img/perry.png">
+                <h2>{{chat.name}}</h2>
+                <p>{{chat.lastText}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                    <p style="text-align: justify">To edit the content of each tab, edit the corresponding.This is a "Facebook" styled Card. The header is created from a Thumbnail List item.
+                    </p>
+                    <p>
+                        <a href="#" class="subdued">1 Like</a>
+                        <a href="#" class="subdued">5 Comments</a>
+                    </p>
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-view>
