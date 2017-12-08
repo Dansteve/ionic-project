@@ -1,0 +1,301 @@
+        //    $ionicPush.register().then(function(t) {
+        //  return $ionicPush.saveToken(t);
+        //}).then(function(t) {
+        //  console.log('Token saved:', t.token);
+        //});
+        //$scope.$on('cloud:push:notification', function(event, data) {
+        //  var msg = data.message;
+        //  alert(msg.title + ': ' + msg.text);
+        //});
+        //        $scope.datas = Schools.all();
+        //        $scope.addItem = function() {
+        //            $scope.datas.$add({
+        //  "name" : "lagoon",
+        //  "address" : "lagoon",
+        //  "in_time" : "8:20",
+        //  "out_time_prep" : "2:00",
+        //  "out_time_nurs" : "3:00",
+        //  "out_time_primary" : "4:00",
+        //  "out_time_secondary" : "4:30",
+        //  "after_school" : "true",
+        //});
+        //        }
+        //        $scope.addItem();
+
+
+angular.module('starter.controllers', ['ionic.cloud'])
+    .controller('DashCtrl', function ($scope, Childs) {
+        //    $ionicPush.register().then(function(t) {
+        //  return $ionicPush.saveToken(t);
+        //}).then(function(t) {
+        //  console.log('Token saved:', t.token);
+        //});
+        //$scope.$on('cloud:push:notification', function(event, data) {
+        //  var msg = data.message;
+        //  alert(msg.title + ': ' + msg.text);
+        //});
+        $scope.childs = Childs.all();
+        //                $scope.datas = Childs.all();
+        //$scope.addItem = function() {
+        //    $scope.datas.$add({
+        //          id: 4,
+        //          name: 'Mike Harrington',
+        //          class: 'Grade 1',
+        //          location: [{
+        //              pickup: 'School',
+        //              current: 'after School',
+        //              dropup: 'home',
+        //                time: '6:30',
+        //              lat: 6.4475244,
+        //              lng: 3.4672081,
+        //          },{
+        //              pickup: 'School',
+        //              current: 'after School',
+        //              dropup: 'home',
+        //                time: '6:30',
+        //              lat: 6.4475244,
+        //              lng: 3.4672081,
+        //          },],
+        //          status: 'pickup',
+        //          face: 'img/mike.png'
+        //  });
+        //}
+        //$scope.addItem();
+
+        $scope.remove = function (child) {
+            Child.remove(child);
+        };
+        console.log($scope.childs)
+    })
+    .controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $ionicLoading, $ionicPopup, $http, $compile) {
+
+    $scope.child = Childs.get($stateParams.childId);
+        $scope.last = $scope.child.location.length;
+        if ($scope.last === 1) {
+            $scope.last = 0
+        } else {
+            $scope.last = $scope.last - 1
+        }
+        console.log($scope.last);
+        $scope.locationLat = $scope.child.location[$scope.last].lat;
+        $scope.locationLng = $scope.child.location[$scope.last].lng;
+        //
+        //            var locationsnumber = $scope.location.replace(/"/g, "");
+        function initialize() {
+            var myLatlng = new google.maps.LatLng($scope.locationLat, $scope.locationLng);
+            console.log('Here');
+            var mapOptions = {
+                center: myLatlng,
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            //Marker + infowindow + angularjs compiled ng-click
+            var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
+            var compiled = $compile(contentString)($scope);
+
+            var infowindow = new google.maps.InfoWindow({
+                content: compiled[0]
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: 'Dansteve'
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+            $scope.map = map;
+        }
+        ionic.Platform.ready(initialize);
+
+        $scope.centerOnMe = function () {
+            console.log("Centering");
+            if (!$scope.map) {
+                return;
+            }
+
+            $scope.loading = $ionicLoading.show({
+                content: 'Getting current location...',
+                showBackdrop: false
+            });
+
+            navigator.geolocation.getCurrentPosition(function (pos) {
+                $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+                $scope.loading.hide();
+            }, function (error) {
+                alert('Unable to get location: ' + error.message);
+            });
+        };
+
+
+
+        $scope.clickTest = function () {
+            var finds = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + $scope.locationLat + ',' + $scope.locationLng + '&location_type=ROOFTOP&result_type=street_address&key=AIzaSyAwtcguSOuofnyJksdy1bIarVj0Jy3Za14'
+            console.log(finds);
+            $http.get(finds)
+                .success(function (newItems) {
+                    $scope.newItems = newItems.results[0].address_components;
+                    //                    console.log($scope.newItems);
+                    $scope.address = $scope.newItems[1].long_name + ' ' + $scope.newItems[3].long_name + ' ' + $scope.newItems[5].long_name + ' ' + $scope.newItems[6].long_name
+                    console.log($scope.address);
+                }).then(function () {
+                    $ionicPopup.show({
+                        template: '',
+                        title: 'Location',
+                        subTitle: $scope.address,
+                        scope: $scope,
+                        buttons: [
+                            {
+                                text: '<b>Okay</b>',
+                                type: 'button-positive',
+                                onTap: function (e) {}
+                        }
+                    ]
+                    });
+                })
+        };
+
+    })
+    .controller('ChatsCtrl', function ($scope, Feeds, $http, $sce, Feeds, Childs) {
+        $scope.trustSrc = function (src) {
+            return $sce.trustAsResourceUrl(src);
+        }
+        $scope.feedData = Feeds.all();
+        $scope.doRefresh = function () {
+            $http.get('/new-items')
+                .success(function (newItems) {
+                    $scope.childs = Childs.all();
+                })
+                .finally(function () {
+                    // Stop the ion-refresher from spinning
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+        };
+    })
+    .controller('ChatDetailCtrl', function ($scope, $stateParams, Feeds) {
+        $scope.feed = Feeds.get($stateParams.feedId);
+    })
+    .controller('SideCtrl', function ($scope, $state, $stateParams, $ionicAuth, $ionicUser, Feeds, Childs) {
+        $scope.childs = Childs.all();
+        $scope.login = function () {
+            console.log('working');
+            $ionicAuth.logout();
+            $state.go('log.login');
+        };
+    })
+    .controller('AccountCtrl', function ($scope) {
+        $scope.settings = {
+            enableFriends: true
+        };
+    })
+    .controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, $ionicAuth, $ionicUser) {
+        $scope.loading = true;
+        $scope.user = {
+            email: '',
+            password: '',
+        }
+        //    $scope.signIn = function () {
+        //        $scope.loading = false;
+        //        console.log($scope.loading);
+        //        $ionicAuth.login('google').then(function (value) {
+        //            $scope.loading = true;
+        //                $scope.full_name = $ionicUser.social.google.data.full_name;
+        //                $scope.profile_picture = $ionicUser.social.google.data.profile_picture;
+        //                $ionicPopup.show({
+        //                    template: '',
+        //                    title: 'Welcome Back',
+        //                    subTitle: $scope.full_name,
+        //                    scope: $scope,
+        //                    buttons: [
+        //                        {
+        //                            text: 'Cancel'
+        //                        },
+        //                        {
+        //                            text: '<b>Okay</b>',
+        //                            type: 'button-positive',
+        //                            onTap: function (e) {
+        //                                $state.go('tab.dash');
+        //                            }
+        //                        }
+        //                    ]
+        //                });
+        //            })
+        //        };
+        $scope.signIn = function () {
+            $scope.loading = false;
+            if ($scope.user.email === 'demo' && $scope.user.password === 'demo') {
+                setTimeout(function () {
+                    $scope.loading = true;
+                    $ionicPopup.show({
+                        template: '',
+                        title: 'Welcome',
+                        subTitle: 'Demo user',
+                        scope: $scope,
+                        buttons: [
+                            {
+                                text: 'Cancel'
+                        },
+                            {
+                                text: '<b>Okay</b>',
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                    $state.go('tab.dash');
+                                    $scope.loading = true;
+                                }
+                        }
+                    ]
+                    });
+                }, 1000);
+            } else {
+                setTimeout(function () {
+                    $scope.loading = true;
+                    $ionicPopup.show({
+                        template: '',
+                        title: 'Login Error',
+                        subTitle: 'Username or Password wrong ;',
+                        scope: $scope,
+                        buttons: [
+                            {
+                                text: 'Cancel'
+                        },
+                            {
+                                text: '<b>Okay</b>',
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                    $scope.loading = true;
+                                }
+                        }
+                    ]
+                    });
+                }, 700);
+            }
+        };
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
+        $scope.options = {
+            loop: false,
+            //            effect: 'fade',
+            //            speed: 500,
+        }
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            $scope.slider = data.slider;
+        });
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        });
+    });

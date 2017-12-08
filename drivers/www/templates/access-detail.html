@@ -1,0 +1,55 @@
+<ion-view view-title="log-access">
+    <ion-content scroll="false" class="" ng-init="">
+        <div class="padding" ng-if="!the.email" style="margin-top:50%; text-align: center">
+            <h1>You don't have a child in this school. Please Login</h1>
+            <button class="button button-block button-positive" ng-click="backlogin()">
+                           Login
+                            </button>
+        </div>
+        <div ng-if="the.email">
+            <div class="bar bar-header bar-positive">
+                <button class="button button-icon icon ion-ios-arrow-back" ng-click="backlogin()"> Exit </button>
+                <h1 class="title">Parent Access</h1>
+            </div>
+
+            <div class="item item-image" style="margin-top: 60px; border: none">
+                <img src="{{the.img}}" class="profile-access">
+            </div>
+            <div class="list row" style="text-align: 20px">
+                <a class="col" style="text-align: center">
+                Name : <br> {{the.first_name}}  {{the.lastname}}
+             </a>
+                <a class="col" style="text-size: center;text-align: center">
+                Email: <br> {{the.email}}
+             </a>
+                <a class="col" style="text-align: center">
+                Phone: <br> {{the.phone}}
+             </a>
+            </div>
+            <div class="item item-divider" style=" min-height: 30px;
+    background-color: #f5f5f5;
+    text-align: center;
+    color: #222;
+    font-weight: 500;
+    font-size: 40px;">2016 - 2017 <br><br> <img src="img/lagoon.png" class="profile-access2" style="height: 60px; width: auto !important"></div>
+            <div class="list">
+                <ion-item ng-repeat="child in childs | filter : {parent : the.email} | filter : {approve : 'true'} | filter : {school : currentSch.name}" type="item-text-wrap" ng-class-even="'item-stable'" style="padding-top: 2px;padding-bottom: 2px;">
+                    <div>
+                        <div class="padding" ng-if="child.length" style="margin-top:50%; text-align: center">
+                            <h1>You don't have a child in this school. Please Login</h1>
+                            <button class="button button-block button-positive" ng-click="backlogin()">
+                           Login
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item-remove-animate item-avatar item-icon-right">
+                        <img ng-src="{{child.face}}">
+                        <h2>{{child.name}}</h2>
+                        <p style="margin-bottom: 0px;">School : {{child.school}}</p>
+                        <p style="margin-bottom: 0px;">Class : {{child.class}}</p>
+                    </div>
+                </ion-item>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

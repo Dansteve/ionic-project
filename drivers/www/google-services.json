@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "794270073021",
+    "firebase_url": "https://pickup-dropoff.firebaseio.com",
+    "project_id": "pickup-dropoff",
+    "storage_bucket": "pickup-dropoff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794270073021:android:0f8bfeed6d54de5b",
+        "android_client_info": {
+          "package_name": "com.developerdansteve.pickupdropoff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794270073021-s52q746pg58sdkur545knfv4re3r37h6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBibXBfUVtx7T8Y87_eABLQEoh1rZ2CnxQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
