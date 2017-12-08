@@ -1,0 +1,23 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="{{socials.name | capitalize}}">
+    <div class="loader" ng-class="{'show': loading == true}"><ion-spinner icon="circles"></ion-spinner></div>
+  <ion-content class="">
+        <div class="center" ng-show="promotelist === undefined || promotelist.length == 0"  style="padding-top: 50%;">
+            <h2>Welcome to Social Promote</h2>
+        <p class="center">We dont have any Link to promote now come bback later/p>
+        </div>
+        <ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
+            <ion-item class="item item-divider center"  ng-hide="promotelist === undefined || promotelist.length == 0">Promote Link List</ion-item>
+            <a ng-repeat="promote in promotelist | filter : socials.name" class="item item-thumbnail-left" ng-click="viewlink(promote.link)" >
+                <img ng-src="img/{{promote.social |lowercase}}.png">
+                <h2>{{promote.title}}</h2>
+                <p>{{promote.description}}</p>
+                <p>{{promote.link}}</p>
+            </a>
+        </ion-list>
+  </ion-content>
+</ion-view>

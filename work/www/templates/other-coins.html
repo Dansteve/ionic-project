@@ -1,0 +1,19 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="Earn Coins">
+    <ion-content class="">
+<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+</ion-refresher>
+        <div class="list">
+            <a class="item item-avatar item-icon-right" ng-repeat="socialList in socialLists" href="#/other/coins/{{socialList.id}}" ng-click="dos()">
+              <img src="img/{{socialList.name}}.png">
+              <h2>{{socialList.name}}</h2>
+              <p>{{promotelist | filter : (social = socialList.name) | numKeys }} links</p>
+              <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

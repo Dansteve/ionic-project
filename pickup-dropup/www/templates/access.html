@@ -1,0 +1,25 @@
+<ion-view view-title="log-access">
+        <ion-header-bar  ng-if="the.email" class="bar bar-header bar-positive">
+         <button class="button button-icon icon ion-ios-arrow-back" ng-click="backlogin()"> Exit </button>
+            <h1 class="title">List of Schools</h1>
+    </ion-header-bar>
+    <ion-content scroll="true" class="" ng-init="" >
+      <div class="padding" ng-if="!the.email" style="margin-top:50%; text-align: center">
+          <h1>You have not logged in before. Please Login</h1>
+          <button class="button button-block button-positive" ng-click="backlogin()">
+                           Login
+                            </button>
+      </div>
+       <div ng-if="the.email">
+          <div class="list" style="margin-top: 60px; border: none">
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="sch in viewsch | unique:'school'" type="item-text-wrap" ng-class-even="'item-stable'"  style="padding-top: 2px;padding-bottom: 2px;" href="#/log/access/{{sch.school.$id}}">
+                <img ng-src="img/ionic.png">
+                <h2>{{sch.school.name}}</h2>
+                 <p style="margin-bottom: 0px;">Address : {{sch.school.address}}</p>
+<!--              <p style="margin-bottom: 0px;">Class : {{child.class}}</p>-->
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

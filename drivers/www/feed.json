@@ -1,0 +1,147 @@
+//        $scope.datas = Childs.all();
+//$scope.addItem = function() {
+//    $scope.datas.$add({
+//          id: 0,
+//          name: 'Ben Sparrow',
+//          class: 'Grade 1',
+//          status: 'pickup',
+//          location: [{
+//              pickup: 'School',
+//              current: 'after School',
+//              dropup: 'home',
+//              time: '6:30',
+//              lat: 6.4397399,
+//              lng: 3.5105207,
+//          },{
+//              pickup: 'School',
+//              current: 'after School',
+//              dropup: 'home',
+//              time: '6:30',
+//              lat: 6.4397399,
+//              lng: 3.5105207,
+//          }],
+//          face: 'img/ben.png'
+//  });
+//}
+//$scope.addItem();
+
+{
+          id: 0,
+          name: 'Ben Sparrow',
+          class: 'Grade 1',
+          status: 'pickup',
+          location: [{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '6:30',
+              lat: 6.4397399,
+              lng: 3.5105207,
+          },{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '6:30',
+              lat: 6.4397399,
+              lng: 3.5105207,
+          }],
+          face: 'img/ben.png'
+  }, {
+          id: 1,
+          name: 'Max Lynx',
+          class: 'Grade 2',
+          location: [{
+              pickup: 'School',
+              current: 'School',
+              dropup: 'School',
+              time: '6:30',
+              lat: 6.4389083,
+              lng: 3.4228957,
+          },{
+              pickup: 'School',
+              current: 'School',
+              dropup: 'School',
+              time: '6:30',
+              lat: 6.4389083,
+              lng: 3.4228957,
+          },],
+          status: 'dropup',
+          face: 'img/max.png'
+  }, {
+          id: 2,
+          name: 'Adam Bradleyson',
+          class: 'Grade 1',
+          location: [{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '2017-10-05T09:05:05.035Z',
+              lat: 6.461696,
+              lng: 3.4270763,
+          },{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '2017-10-06T09:05:05.035Z',
+              lat: 6.461696,
+              lng: 3.4270763,
+          },{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '2017-10-07T09:05:05.035Z',
+              lat: 6.461696,
+              lng: 3.4270763,
+          },{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+              time: '2017-10-08T09:05:05.035Z',
+              lat: 6.461696,
+              lng: 3.4270763,
+          },],
+          status: 'pickup',
+          face: 'img/adam.jpg'
+  }, {
+          id: 3,
+          name: 'Perry Governor',
+          class: 'Grade 2',
+          location: [{
+              pickup: 'School',
+              current: 'School',
+              dropup: 'School',
+              time: '6:30',
+              lat: 6.443748,
+              lng: 3.4244033,
+          },{
+              pickup: 'School',
+              current: 'School',
+              dropup: 'School',
+              time: '6:30',
+              lat: 6.443748,
+              lng: 3.4244033,
+          },],
+          status: 'dropup',
+          face: 'img/perry.png'
+  }, {
+          id: 4,
+          name: 'Mike Harrington',
+          class: 'Grade 1',
+          location: [{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+                time: '6:30',
+              lat: 6.4475244,
+              lng: 3.4672081,
+          },{
+              pickup: 'School',
+              current: 'after School',
+              dropup: 'home',
+                time: '6:30',
+              lat: 6.4475244,
+              lng: 3.4672081,
+          },],
+          status: 'pickup',
+          face: 'img/mike.png'
+  }

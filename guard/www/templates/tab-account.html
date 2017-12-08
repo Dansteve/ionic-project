@@ -1,0 +1,59 @@
+<ion-view view-title="Account">
+    <ion-content style="background: rgba(56, 126, 245, 0.09);" ng-init="detail = true">
+        <ion-list style="background: rgba(56, 126, 245, 0.09);">
+            <div class="item item-image padding">
+                <img src="{{Loguser.img}}" class="profile">
+                <div class="button-bar">
+                <button class="button button-full button-clear ion-ios-download button-positive" class="postivie" style="margin-top: 0px;text-align: center" ng-click="loadImage()"ng-disabled="image !== null"> Edit image</button>
+                <button class="button button-full button-clear ion-ios-upload button-positive" class="postivie" style="margin-top: 0px;text-align: center" ng-click="uploadImage()" ng-disabled="image === null"> Save image</button>
+                </div>
+            </div>
+            <div class="item item-divider item-button-right"  ng-click="detail = !detail">
+                Main Account
+            </div>
+            <div id="detail" ng-show="detail">
+<!--
+            <label class="item item-input">
+                <span class="input-label">First name</span>
+                <input type="text" value="{{Loguser.first_name}}" ng-disabled="true">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Last name</span>
+                <input type="text" value="{{Loguser.lastname}}" ng-disabled="true">
+              </label>
+-->
+                <label class="item item-input">
+                <span class="input-label">Driver Id </span>
+                <input type="text" value="{{Loguser.id}}" ng-disabled="true">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Vendors Name</span>
+                <input type="text" value="{{vendor.name}}" ng-disabled="true">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Vendors Id</span>
+                <input type="text" value="{{Loguser.vendor}}" ng-disabled="true">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" value="{{Loguser.email}}" ng-disabled="true">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="number" value="{{Loguser.phone}}" ng-disabled="true">
+              </label>
+            </div>
+           <div class="item item-divider" ng-click="Accountscontrol = !Accountscontrol">
+               Accounts control
+            </div>
+            <div id="Accounts control" ng-show="Accountscontrol">
+            <ion-toggle ng-model="settings.enableFriends" ng-click="enablefriends()">
+                Enable Notification
+            </ion-toggle>
+            <ion-toggle ng-model="settings.enableTrack" ng-click="enabletrack()">
+                Enable Tracking
+            </ion-toggle>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,41 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{child.name}}">
+  <ion-content style="background: rgba(56, 126, 245, 0.09);" class="padding" ng-init="init();map = true;history;">
+    <div class="list center" style="margin: 0;">
+    <img src="{{child.face}}" class="profile">
+        <h3 style="padding:0;margin:0;">{{child.name}}</h3>
+        <p>{{child.class}}</p>
+        <p>Status : {{child.status}}</p>
+     </div>
+      <div class="row center" style="padding-top: 0;margin-top: 0;">
+        <div class="col">
+        <button class="button button-outline button-positive" ng-click="clickTest()">Location</button></div>
+        <div class="col"><button class="button button-outline button-positive" ng-click="showmap();map = !map ; history = false">View-Map</button></div>
+        <div class="col"><button class="button button-outline button-positive" ng-click="history = !history ; map = false">History</button></div>
+    </div>
+    <div id="wrapper-map" style="height: calc(100vh);" ng-class="{'hide': history == true}">
+    <div id="map" data-tap-disabled="true" ng-show="map"></div>
+    </div>
+    <div class="center" ng-show="history">
+        <div class="row item item-divider">
+            <div class="col">S/N</div>
+            <div class="col">Pick-Up</div>
+            <div class="col col-40">Date/Time</div>
+            <div class="col">Drop-Off</div>
+            <div class="col col-40">Date/Time</div>
+    </div>
+        <div ng-repeat="history in child.location" class="row item item-text-wrap">
+        <div class="col">{{$index + 1}}</div>
+        <div class="col">{{history.pickup}}</div>
+        <div class="col col-40">{{history.time | date : 'medium'}}</div>
+        <div class="col">{{history.dropup}}</div>
+        <div class="col col-40">{{history.time | date : 'medium'}}</div>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

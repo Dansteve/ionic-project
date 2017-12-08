@@ -1,0 +1,62 @@
+<ion-view view-title="Dashboard {{sru | capitalize }}">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-help" ng-click="modal.show()"></button>
+    </ion-nav-buttons>
+    <ion-content class="" style="background: rgba(56, 126, 245, 0.09);">
+        <div class="list">
+            <ion-item class="item-remove-animate item-avatar item-icon-right item-button-right" ng-repeat="child in childs | filter : { vendor : Loguser.vendor} | filter : { driver : Loguser.id} | filter : { approve : true } | filter : filter2 | offset: currentPage*itemsPerPage |  limitTo: itemsPerPage" type="item-text-wrap" ng-class-even="'item-stable'">
+                <img ng-src="{{child.face}}">
+                <a class="subdued" style="color: #111 !important;"> {{child.name}}</a>
+                <span class="item-note">
+      <div class="subdued workers" style="color: #111 !important;" ng-show="child.status !== 'dropoff' && hour < 12">Pickup : {{child.route[sru].pickup.address}}</div>
+      <div class="subdued workers" style="color: #111 !important;" ng-show="child.status === 'dropoff' && hour < 12"> DropOff : {{getschool(child.school)}} </div>
+
+
+      <div class="subdued workers" style="color: #111 !important;" ng-show="child.status !== 'dropoff' && hour > 12">Pickup : {{getschool(child.school)}}</div>
+      <div class="subdued workers" style="color: #111 !important;" ng-show="child.status === 'dropoff' && hour > 12">DropOff : {{child.route[sru].dropoff.address}} </div>
+
+      <a class="subdued button " ng-class="{'button-assertive': child.status === 'pickup' , 'button-balanced': child.status !== 'pickup','button-energized': child.status === 'pending'}" ng-disabled="child.status === 'dropoff' || child.status === 'pending'"  ng-click="pickUp(child.$id,'dropoff',child.name)">pickUp</a>
+      <a class="subdued button "  ng-class="{'button-assertive': child.status === 'dropoff' , 'button-balanced': child.status !== 'dropoff','button-energized': child.status === 'pending'}" style="padding-right: 10px !important;" ng-disabled="child.status === 'pickup' || child.status === 'pending'" ng-click="pickUp(child.$id,'pending',child.name)">DropOff</a>
+                </span>
+            </ion-item>
+            <div class="center" style="padding: 20px; font-size: 20px"> Loading list </div>
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-positive pagination">
+        <ul style="display: inline-block;width: 100%">
+            <li  ng-class="prevPageDisabled()" style="display: inline-block;padding: 6px;font-size: 17px;">
+                <a class="item-icon-left" ng-click="prevPage()" style="color:#fff !important;text-decoration: none;"><i class="icon ion-ios-arrow-left"></i>Prev</a>
+            </li>
+            <li class="title" ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" style="display: inline-block;padding: 6px;">
+                <a href="#" style="color:#fff !important;text-decoration: none;">{{n+1}}</a>
+            </li>
+            <li ng-class="nextPageDisabled()" style="display: inline-block;padding: 6px;float: right;font-size: 17px;">
+                <a  class="item-icon-right" ng-click="nextPage()" style="color:#fff !important;text-decoration: none;">Next<i class="icon ion-ios-arrow-right"></i></a>
+            </li>
+        </ul>
+    </div>
+    <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Help and Note</h1>
+                <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <ol style="padding-left: 30px; padding-top: 15px;list-style: disc !important;">
+                    <!--
+                    <li  style="font-size: 20px;padding: 6px;"><p>Button with the <a class="button button-energized" style="vertical-align: inherit;
+"> yellow </a> color means pending action</p></li>
+-->
+                    <li style="font-size: 20px;padding: 6px;">
+                        <p>Button with the <a class="button button-balanced" style="vertical-align: inherit;
+"> Green </a> color mean action have been taken </p>
+                    </li>
+                    <li style="font-size: 20px;padding: 6px;">
+                        <p>Button with the <a class="button button-assertive" style="vertical-align: inherit;
+"> Red </a> color means action is required to be taken </p>
+                    </li>
+                </ol>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</ion-view>

@@ -1,0 +1,74 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-view view-title="Account">
+    <div class="loader" ng-class="{'show': loading == true}">
+        <ion-spinner icon="circles"></ion-spinner>
+    </div>
+    <ion-content ng-init="detail = true">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list>
+            <div ng-class="{'cover' : loading == false}"></div>
+            <div class="item item-image padding">
+                <img ng-if="profile_picture" ng-src="{{profile_picture}}" class="profile">
+                <img ng-if="!profile_picture" ng-src="img/user.png" class="profile">
+
+                <button class="button button-full button-clear ion-edit button-positive" class="postivie" style="margin-top: 0px;text-align: center">Edit image</button>
+            </div>
+            <div class="item item-divider item-button-right" ng-click="detail = !detail">
+                Details
+            </div>
+            <div id="detail" ng-show="detail">
+                <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" value="{{full_name}}" ng-if="full_name">
+                <input type="text" value="John Doe" ng-if="!full_name">
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" value="Johndoe@example.com">
+              </label><label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="tel" value="+919876543210">
+              </label>
+            </div>
+            <div class="item item-divider" ng-click="CoinsBalance = !CoinsBalance">
+                Coins Balance
+            </div>
+            <div id="CoinsBalance" ng-show="CoinsBalance">
+                <div class="item  item-button-right">
+                    Total : 500
+                </div>
+                <div class="item  item-button-right">
+                    Used : 400
+                </div>
+                <div class="item  item-button-right">
+                    remaining : {{user.coins}}
+                    <button class="button button-positive">
+                  <i class="icon ion-cash"></i>
+                </button>
+                </div>
+            </div>
+            <div class="item item-divider" ng-click="Accountscontrol = !Accountscontrol">
+                Accounts control
+            </div>
+            <div id="Accounts control" ng-show="Accountscontrol">
+                <ion-toggle class="item-icon-left" ng-model="settings.enableLinkedin" ng-click="signInlinkedin()">
+                    <i class="icon ion-social-linkedin"></i>Linkedin
+                </ion-toggle>
+                <ion-toggle class="item-icon-left" ng-model="settings.enableFacebook" ng-click="signInfacebook()">
+                    <i class="icon ion-social-facebook"></i>Facebook
+                </ion-toggle>
+                <ion-toggle class="item-icon-left" ng-model="settings.enableTwitter" ng-click="signIntwitter()">
+                    <i class="icon ion-social-twitter"></i>Twitter
+                </ion-toggle>
+                <ion-toggle class="item-icon-left" ng-model="settings.enableInstagram" ng-click="signIninstagram()">
+                    <i class="icon ion-social-instagram"></i>Instagram
+                </ion-toggle>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+{
+    "name": "pickup-dropup",
+    "app_id": "4efb1542",
+    "type": "ionic1",
+    "integrations": {
+        "gulp": {},
+        "cordova": {}
+    },
+    "watchPatterns": [
+        "scss/**/*",
+        "www/**/*",
+        "!www/lib/**/*",
+        "!www/**/*.map"
+    ]
+}

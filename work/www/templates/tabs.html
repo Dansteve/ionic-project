@@ -1,0 +1,69 @@
+<!--
+Developer : Dansteve Adekanbi
+copyright : Dansteve Adekanbi
+year : 2017
+-->
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive mynavbar">
+        <div class="hifed"></div>
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+        <ion-tabs class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+
+            <!-- Dashboard Tab -->
+            <ion-tab icon-off="ion-flash" icon-on="ion-flash" href="#/tab/dash">
+                <ion-nav-view name="tab-dash"></ion-nav-view>
+            </ion-tab>
+            <!-- Account Tab -->
+            <ion-tab icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+                <ion-nav-view name="tab-account"></ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-content id="sidebar">
+            <div class="item profile-head" id="profile-head"></div>
+            <ion-list>
+                <a class="item item-thumbnail now" id="now" menu-close href="#/tab/account">
+                    <img  ng-if="profile_picture" ng-src="{{profile_picture}}" class="profile">
+                  <img ng-if="!profile_picture"  ng-src="img/user.png" class="profile">
+                </a>
+                <div id="profile-details">
+                  <h2 ng-if="profile_picture" id="name">{{full_name}}</h2>
+                  <h2 ng-if="!profile_picture" id="name">John Doe</h2>
+                    <div class="row">
+                    <div class="col"> 10 like</div><div class="col"> 15 comments</div><div class="col"> 5 follows</div></div>
+                </div>
+                <a class="item item-stable" menu-close href="#/tab/dash" >
+                    Dashboard
+                </a>
+                <a class="item item-stable" menu-close href="#/tab/dash" >
+                    Services
+                </a>
+                <a class="item item-stable" menu-close href="#/other/coins" >
+                    Earn Coins  <span class="item-note">100 Coins</span>
+                </a>
+                <a class="item item-stable" menu-close href="#/other/promote" >
+                    Promote
+                </a>
+                <a class="item item-stable" menu-close href="#/tab/account" >
+                    Settings
+                </a>
+                <a class="item item-stable" menu-close href="#/tab/dash" >
+                    Go pro
+                </a>
+                <button class="button button-full button-clear icon-right ion-log-out button-positive" menu-close ng-click="logout()" class="postivie" style="margin-top: 0px; text-align: right">Logout</button>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
