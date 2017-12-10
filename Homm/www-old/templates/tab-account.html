@@ -1,0 +1,107 @@
+<ion-view view-title="Account">
+    <ion-content style="background: rgba(56, 126, 245, 0.09);" ng-init="childlist = false;detail = true;Second = false ;Accountscontrol=false">
+        <ion-list style="background: rgba(56, 126, 245, 0.09);">
+            <div class="item item-image padding">
+                <img src="{{Loguser.img}}" class="profile" ng-click="modal.show()">
+                <div class="button-bar">
+                    <button class="button button-full button-clear ion-ios-upload button-positive" class="postivie" style="margin-top: 0px;text-align: center" ng-click="loadImage('1')" ng-disabled="image !== null"> Edit image</button>
+                    <button class="button button-full button-clear ion-ios-download button-positive" class="postivie" style="margin-top: 0px;text-align: center" ng-click="uploadImage()" ng-disabled="image === null"> Save image</button>
+                </div>
+            </div>
+            <div class="item item-divider item-button-right" ng-click="detail = !detail;Second=false;Accountscontrol=false;childlist = false;">
+                Main account
+<!--
+                <button class="button button-positive" style="margin-top: -7px;">
+                  <i class="icon ion-edit"></i>
+                </button>
+-->
+            </div>
+            <div id="detail" ng-show="detail">
+                <label class="item item-input">
+                <span class="input-label">First name : </span>
+                <input type="text" value="{{Loguser.first_name}}" ng-disabled="true">
+              </label><label class="item item-input">
+                <span class="input-label">Last name : </span>
+                <input type="text" value="{{Loguser.lastname}}" ng-disabled="true">
+              </label><label class="item item-input">
+                <span class="input-label">Email : </span>
+                <input type="email" value="{{Loguser.email}}" ng-model="the.email" ng-disabled="leveler !== '1'">
+              </label><label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="text" value="{{Loguser.phone}}"  ng-model="the.phone" ng-disabled="leveler !== '1'">
+              </label>
+                <button class="button button-block button-positive" ng-click="onesave()" ng-show="leveler == '1'">
+                  Save
+                </button>
+            </div>
+
+            <div class="item item-divider" ng-click="Second = !Second;detail=false;Accountscontrol=false;childlist = false;" ng-show="leveler == 1">
+                Add secondary account
+            </div>
+            <form id="Accounts control" ng-show="Second" name="steve" ng-show="leveler == 1">
+                <label class="item item-input">
+                <span class="input-label">Fullname : </span>
+                <input type="text" ng-value="second.name" ng-model="second.name" required>
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Second Email : </span>
+                <input type="email" ng-value="second.email" ng-model="second.email" required>
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Phone : </span>
+                <input type="text"  ng-value="second.phone" ng-model="second.phone" required>
+              </label>
+                <label class="item item-input">
+                Image : {{image}}
+                <button class="button button-full button-clear ion-ios-upload button-positive" class="postivie" style="margin-top: 0px;text-align: center" ng-click="loadImage('2')" ng-disabled="image !== null" > Add image</button>
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Password : </span>
+                <input type="text" ng-value="second.password" ng-model="second.password" required>
+              </label>
+                <button class="button button-block button-positive" ng-click="secondsave()" ng-disabled="!second.name || !second.email || !second.phone || !second.password ">
+                  Save
+                </button>
+            </form>
+            <div class="item item-divider" ng-show="leveler == 1" ng-click="childlist = !childlist;detail= false;Second=false;Accountscontrol=false;">
+                List of child(ren)
+            </div>
+            <div class="list" ng-show="childlist">
+                <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email}" type="item-text-wrap" href="#/tab/dash/{{child.$id}}" ng-class-even="'item-stable'" ng-if="child.approve">
+                    <img ng-src="{{child.face}}">
+                    <h2>{{child.name}}</h2>
+                    <p>Child-id : {{child.id}}</p>
+                    <a class="subdued" >Active</a>
+                </ion-item>
+                <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email}" type="item-text-wrap" ng-class-even="'item-stable'" ng-if="!child.approve">
+                    <img ng-src="{{child.face}}">
+                    <h2>{{child.name}}</h2>
+                    <p>Child-id : {{child.id}}</p>
+                    <a class="subdued" >Awaiting approval or Suspended</a>
+                </ion-item>
+            </div>
+            <div class="item item-divider" ng-click="Accountscontrol = !Accountscontrol;Second=false;detail=false;childlist = false;">
+                Accounts control
+            </div>
+            <div id="Accounts control" ng-show="Accountscontrol">
+                <ion-toggle ng-model="settings.enableFriends" ng-click="enablefriends()">
+                    Enable notification
+                </ion-toggle>
+                <ion-toggle ng-model="settings.enableTrack" ng-click="enabletrack()">
+                    Enable tracking
+                </ion-toggle>
+            </div>
+        </ion-list>
+        <script id="templates/modal.html" type="text/ng-template">
+            <ion-modal-view ng-init="" style="background: rgba(10, 157, 199, 0.95);">
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">{{Loguser.lastname}}</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                </ion-header-bar>
+                <ion-content class="" style="rgba(250, 250, 250, 0);">
+                    <div id="seeMe" style="text-align: center"><img src="{{Loguser.img}}" class="profile" style="height: 50%;width: 60% !important;"></div>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

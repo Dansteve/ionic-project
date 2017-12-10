@@ -1,0 +1,59 @@
+<ion-view view-title="{{child.name}}">
+  <ion-content style="background: rgba(56, 126, 245, 0.09);" class="padding" ng-init="inition();history=false;route=false;mapshow=true">
+    <div class="list center" style="margin: 0;">
+    <img src="{{child.face}}" class="profile" ng-click="modal.show()">
+        <h3 style="padding:0;margin:0;">{{child.name | capitalize}}</h3>
+        <p style="margin: 0px">Class : {{child.class | capitalize}}</p>
+        <p>Status : {{child.status}}</p>
+     </div>
+      <div class="row center" style="padding-top: 0;margin-top: 0;">
+        <div class="col">
+        <button class="button button-outline button-positive" ng-click="clickTest()">Location</button></div>
+        <div class="col"><button class="button button-outline button-positive" ng-click="showmap();mapshow = true ; route = false ; history = false ;inition()">Map</button></div>
+        <div class="col"><button class="button button-outline button-positive" ng-click="history = true ; route = false ; mapshow = false">History</button></div>
+        <div class="col"><button class="button button-outline button-positive" ng-click="route = true ; history = false; mapshow = false">Route</button></div>
+    </div>
+    <div id="wrapper-map" style="height: calc(100vh);" ng-class="{'hide': history == true ||  route == true}">
+    <div id="map" data-tap-disabled="true" ng-show="mapshow"></div>
+    </div>
+    <div class="center" ng-show="history">
+        <div class="row item item-divider">
+            <div class="col-10">s/n</div>
+            <div class="col">status</div>
+            <div class="col">location</div>
+            <div class="col col"><i class="icon ion-clock"></i></div>
+    </div>
+        <div ng-repeat="history in child.location | orderObjectBy:'day'" class="row item item-text-wrap"  ng-class-even="'item-stable'">
+        <div class="col-10">{{$index + 1}}</div>
+        <div class="col">{{history.action}}</div>
+        <div class="col">{{history.location}}</div>
+        <div class="col" ng-bind-html="history.time "></div>
+    </div>
+    </div>
+    <div class="center" ng-show="route">
+        <div class="row item item-divider">
+            <div class="col">Day</div>
+            <div class="col">Pick-Up</div>
+            <div class="col">Drop-Off</div>
+            <div class="col">Late</div>
+    </div>
+        <div ng-repeat="route in child.route | orderObjectBy : 'id' " class="row item item-text-wrap" ng-hide="route.id === 6">
+        <div class="col">{{days[$index].name}}</div>
+        <div class="col">{{route.pickup.address}}</div>
+        <div class="col">{{route.dropoff.address}}</div>
+        <div class="col">{{route.late}}</div>
+    </div>
+    </div>
+                    <script id="templates/modal.html" type="text/ng-template">
+                    <ion-modal-view ng-init="" style="background: rgba(10, 157, 199, 0.95);">
+                        <ion-header-bar class="bar bar-header bar-positive">
+                            <h1 class="title">{{child.name}}</h1>
+                            <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                        </ion-header-bar>
+                        <ion-content class="" style="rgba(250, 250, 250, 0);">
+                        <div id="seeMe" style="text-align: center"><img src="{{child.face}}" class="profile" style="height: 50%;width: 60% !important;"></div>
+                        </ion-content>
+                    </ion-modal-view>
+                </script>
+  </ion-content>
+</ion-view>

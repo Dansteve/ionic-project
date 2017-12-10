@@ -1,0 +1,44 @@
+<ion-view view-title="Broadcast">
+    <ion-content style="background: rgba(56, 126, 245, 0.09);" ng-init="comment = false">
+        <div ng-repeat="data in feedData" ng-model="$index">
+            <div class="list card">
+                <div class="item item-avatar">
+                    <img ng-src="{{data.mypicture}}">
+                    <h2>{{data.sendername}}</h2>
+                    <p>{{data.created_time}}</p>
+                    <p>{{data.time}}</p>
+                </div>
+                <div class="item item-body">
+                    <p style="margin-top:0">
+                        {{data.message.text}}
+                    </p>
+                    <img ng-src="{{data.message.img}}" class="full-image" ng-if="data.message.img">
+                    <a ng-if="data.message.video">
+                        <div class="row zero-padding" class="zero-padding">
+                            <div class="col zero-padding" class="zero-padding">
+                                <div class="video-container">
+                                    <iframe ng-src="{{trustSrc(data.message.video)}}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <p>
+                        <a class="subdued">{{data.like}} Likes</a>
+                        <a class="subdued">{{data.dislike}} Dislikes</a>
+                    </p>
+                </div>
+                <div class="button-bar" style="-webkit-transform:none !important">
+                    <a class="button icon ion-thumbsup positive" style="border: none !important;" ng-click="like(data.$id);"></a>
+<!--                    <a class="button icon ion-chatbox positive" ng-click="comment = !comment" style="border: none !important;"></a>-->
+                    <a class="button icon ion-thumbsdown positive" style="border: none !important;" ng-click="dislike(data.$id);"></a>
+                </div>
+                <div ng-show="comment">
+                    <label class="item item-input">
+                                <textarea type="text" required placeholder="Enter Comment" rows="5" ng-model="comments.details" ></textarea>
+                        </label>
+                    <button class="button button-full button-positive" type="Submit" ng-click="comment = false" ng-disabled="!comment " style="padding: 0;border: none;margin: 0;">Submit</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

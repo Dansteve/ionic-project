@@ -1,0 +1,33 @@
+<ion-view view-title="Dashboard">
+    <ion-content class="" style="background: rgba(56, 126, 245, 0.09);" scroll="false">
+        <div class="list"  scroll="true">
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email} |
+  offset: currentPage*itemsPerPage |  limitTo: itemsPerPage" type="item-text-wrap" ng-href="#/tab/dash/{{child.$id}}" ng-class-even="'item-stable'" ng-if="child.approve">
+                <img ng-src="{{child.face}}">
+                <h2>{{child.name | capitalize}}</h2>
+                <p>Status : {{child.status | capitalize}}</p>
+                <p>time : {{child.time |  capitalize}}</p>
+                <p>Location : {{child.currentAddress | capitalize}}</p>
+                <p></p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+<!--            <div class="center" style="padding: 20px; font-size: 20px"> Loading list</div>-->
+        </div>
+<!--        <div class="center" style="padding: 20px; font-size: 20px"> Loading list </div>-->
+
+    <div class="bar bar-footer bar-positive pagination">
+        <ul style="display: inline-block;width: 100%">
+            <li  ng-class="prevPageDisabled()" style="display: inline-block;padding: 6px;font-size: 17px;">
+                <a class="item-icon-left" ng-click="prevPage()" style="color:#fff !important;text-decoration: none;"><i class="icon ion-ios-arrow-left"></i>Prev</a>
+            </li>
+            <li class="title" ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)" style="display: inline-block;padding: 6px;">
+                <a href="#" style="color:#fff !important;text-decoration: none;">{{n+1}}</a>
+            </li>
+            <li ng-class="nextPageDisabled()" style="display: inline-block;padding: 6px;float: right;font-size: 17px;">
+                <a  class="item-icon-right" ng-click="nextPage()" style="color:#fff !important;text-decoration: none;">Next<i class="icon ion-ios-arrow-right"></i></a>
+            </li>
+        </ul>
+    </div>
+    </ion-content>
+
+</ion-view>
