@@ -1,5 +1,5 @@
 <ion-view view-title="Dashboard">
-    <ion-content class="" style="background: rgba(56, 126, 245, 0.09);" scroll="false">
+    <ion-content class="bodyback" scroll="false">
         <div class="list"  scroll="true">
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email} |
   offset: currentPage*itemsPerPage |  limitTo: itemsPerPage" type="item-text-wrap" ng-href="#/tab/dash/{{child.$id}}" ng-class-even="'item-stable'" ng-if="child.approve">

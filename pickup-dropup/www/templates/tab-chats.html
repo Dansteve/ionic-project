@@ -1,5 +1,5 @@
 <ion-view view-title="Broadcast">
-    <ion-content style="background: rgba(56, 126, 245, 0.09);" ng-init="comment = false">
+    <ion-content class="bodyback" ng-init="comment = false">
         <div ng-repeat="data in feedData" ng-model="$index">
             <div class="list card">
                 <div class="item item-avatar">
@@ -40,5 +40,6 @@
                 </div>
             </div>
         </div>
+        <div style="padding: 25px;font-size: 20px;text-align: center;">End of Broadcast.</div>
     </ion-content>
 </ion-view>

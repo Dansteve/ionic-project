@@ -1,6 +1,6 @@
 var IonicApp = angular.module('starter.controllers', ['firebase', 'ionic.cloud']);
 
-IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $ionicPopup, $localstorage, $ionicAuth, $ionicPush, Schools, Childs, Parents) {
+IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $ionicPopup, $localstorage, $ionicAuth, $ionicPush, Schools, Childs, Users) {
     if (!navigator.onLine) {
         console.log('false');
         $ionicPopup.show({
@@ -23,21 +23,21 @@ IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $io
     $scope.itemsPerPage = 5;
     $scope.currentPage = 0;
 
-//     $scope.range = function() {
-//    var rangeSize = 5;
-//    var ret = [];
-//    var start;
-//
-//    start = $scope.currentPage;
-//    if ( start > $scope.pageCount()-rangeSize ) {
-//      start = $scope.pageCount()-rangeSize;
-//    }
-//
-//    for (var i=start; i<start+rangeSize; i++) {
-//      ret.push(i);
-//    }
-//    return ret;
-//  };
+    //     $scope.range = function() {
+    //    var rangeSize = 5;
+    //    var ret = [];
+    //    var start;
+    //
+    //    start = $scope.currentPage;
+    //    if ( start > $scope.pageCount()-rangeSize ) {
+    //      start = $scope.pageCount()-rangeSize;
+    //    }
+    //
+    //    for (var i=start; i<start+rangeSize; i++) {
+    //      ret.push(i);
+    //    }
+    //    return ret;
+    //  };
 
 
 
@@ -65,16 +65,16 @@ IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $io
         return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
     };
 
-//      $scope.setPage = function(n) {
-//    if (n > 0 && n < $scope.pageCount()) {
-//      $scope.currentPage = n;
-//    }
-//  };
+    //      $scope.setPage = function(n) {
+    //    if (n > 0 && n < $scope.pageCount()) {
+    //      $scope.currentPage = n;
+    //    }
+    //  };
 
-//  $scope.$watch("currentPage", function(newValue, oldValue) {
-//    $scope.pagedItems = Item.get(newValue*$scope.itemsPerPage, $scope.itemsPerPage);
-//    $scope.total = Item.total();
-//  });
+    //  $scope.$watch("currentPage", function(newValue, oldValue) {
+    //    $scope.pagedItems = Item.get(newValue*$scope.itemsPerPage, $scope.itemsPerPage);
+    //    $scope.total = Item.total();
+    //  });
 
 
     $scope.Loguser = $localstorage.get('LoginUser');
@@ -87,7 +87,7 @@ IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $io
         $cordovaLocalNotification.add({
             id: "123334",
             date: alarmTime,
-            message: "Welcome Back " + $scope.Loguser.lastname,
+            message: "Welcome Back " + $scope.Loguser.last_name,
             autoCancel: true,
             title: "welcome",
             icon: "res://icon",
@@ -99,7 +99,7 @@ IonicApp.controller('DashCtrl', function ($scope, $cordovaLocalNotification, $io
     //        $scope.add();
 })
 
-IonicApp.controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $ionicPopup, $ionicModal, $ionicLoading, $compile, $ionicPopup, $http, $cordovaGeolocation, Parents, Drivers) {
+IonicApp.controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $ionicPopup, $ionicModal, $ionicLoading, $compile, $ionicPopup, $http, $cordovaGeolocation, Users, Drivers) {
 
     if (!navigator.onLine) {
         console.log('false');
@@ -119,28 +119,28 @@ IonicApp.controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $
                     ]
         });
     };
-//    setInterval(function () {
-//
-//        if (!navigator.onLine) {
-//            console.log('false');
-//            $ionicPopup.show({
-//                template: '',
-//                title: 'Network Error',
-//                subTitle: 'Please check your network connection and try again.',
-//                scope: $scope,
-//                buttons: [
-//                    {
-//                        text: '<b>Okay</b>',
-//                        type: 'button-positive',
-//                        onTap: function (e) {
-//                            $scope.loading = true;
-//                        }
-//                        }
-//                    ]
-//            });
-//        };
-//
-//    }, 22000);
+    //    setInterval(function () {
+    //
+    //        if (!navigator.onLine) {
+    //            console.log('false');
+    //            $ionicPopup.show({
+    //                template: '',
+    //                title: 'Network Error',
+    //                subTitle: 'Please check your network connection and try again.',
+    //                scope: $scope,
+    //                buttons: [
+    //                    {
+    //                        text: '<b>Okay</b>',
+    //                        type: 'button-positive',
+    //                        onTap: function (e) {
+    //                            $scope.loading = true;
+    //                        }
+    //                        }
+    //                    ]
+    //            });
+    //        };
+    //
+    //    }, 22000);
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
         scope: $scope
@@ -148,7 +148,7 @@ IonicApp.controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $
         $scope.modal = modal;
     });
 
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
 
     $scope.child = Childs.get($stateParams.childId);
 
@@ -319,7 +319,7 @@ IonicApp.controller('ChildDetailCtrl', function ($scope, $stateParams, Childs, $
 
 })
 
-IonicApp.controller('BroadcastsCtrl', function ($scope, Feeds, $http, $ionicPopup, $sce, Feeds, Childs, Parents) {
+IonicApp.controller('BroadcastsCtrl', function ($scope, Feeds, $http, $ionicPopup, $sce, Feeds, Childs, Users) {
 
     if (!navigator.onLine) {
         console.log('false');
@@ -340,48 +340,48 @@ IonicApp.controller('BroadcastsCtrl', function ($scope, Feeds, $http, $ionicPopu
         });
     };
 
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
     $scope.trustSrc = function (src) {
         return $sce.trustAsResourceUrl(src);
     }
     $scope.feedData = Feeds.all();
 
-//    var f = Feeds.sorted();
-//
-//    console.log(f);
+    //    var f = Feeds.sorted();
+    //
+    //    console.log(f);
 
     $scope.likedised = 0
     $scope.disliked = 0
     console.log($scope.feedData);
     $scope.like = function (d) {
-        if ($scope.likedised === 0){
-        var c = d
-        console.log(c);
-        $scope.currentfeed = Feeds.get(d);
-        $scope.currentfeed.like += 1;
-        $scope.currentfeed.dislike -= 1;
+        if ($scope.likedised === 0) {
+            var c = d
+            console.log(c);
+            $scope.currentfeed = Feeds.get(d);
+            $scope.currentfeed.like += 1;
+            $scope.currentfeed.dislike -= 1;
 
-            if ( $scope.currentfeed.dislike < 0){
-                $scope.currentfeed.dislike  = 0;
+            if ($scope.currentfeed.dislike < 0) {
+                $scope.currentfeed.dislike = 0;
             }
-        console.log($scope.currentfeed);
-        $scope.likedised = 1;
-        $scope.disliked = 0;
+            console.log($scope.currentfeed);
+            $scope.likedised = 1;
+            $scope.disliked = 0;
         }
     }
     $scope.dislike = function (d) {
-        if (!$scope.disliked){
-        var c = d
-        console.log(c);
-        $scope.currentfeed = Feeds.get(d);
-        $scope.currentfeed.dislike += 1;
-        $scope.currentfeed.like -= 1;
-            if ( $scope.currentfeed.like < 0){
-                 $scope.currentfeed.like = 0;
+        if (!$scope.disliked) {
+            var c = d
+            console.log(c);
+            $scope.currentfeed = Feeds.get(d);
+            $scope.currentfeed.dislike += 1;
+            $scope.currentfeed.like -= 1;
+            if ($scope.currentfeed.like < 0) {
+                $scope.currentfeed.like = 0;
             }
-        console.log($scope.currentfeed);
-        $scope.likedised = 0;
-        $scope.disliked = 1;
+            console.log($scope.currentfeed);
+            $scope.likedised = 0;
+            $scope.disliked = 1;
         }
     }
     $scope.doRefresh = function () {
@@ -396,7 +396,7 @@ IonicApp.controller('BroadcastsCtrl', function ($scope, Feeds, $http, $ionicPopu
     };
 })
 
-IonicApp.controller('BroadcastDetailCtrl', function ($scope, $stateParams, $ionicPopup, Feeds, Parents) {
+IonicApp.controller('BroadcastDetailCtrl', function ($scope, $stateParams, $ionicPopup, Feeds, Users) {
 
     if (!navigator.onLine) {
         console.log('false');
@@ -417,11 +417,11 @@ IonicApp.controller('BroadcastDetailCtrl', function ($scope, $stateParams, $ioni
         });
     };
 
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
     $scope.feed = Feeds.get($stateParams.feedId);
 })
 
-IonicApp.controller('SideCtrl', function ($scope, $state, $ionicPush, $ionicPopup, $stateParams, Feeds, Childs, Parents, Parents, $localstorage, $ionicAuth, Days) {
+IonicApp.controller('SideCtrl', function ($scope, $state, $ionicPush, $ionicPopup, $stateParams, Feeds, Childs, Users, Users, $localstorage, $ionicAuth, Days) {
 
     $scope.days = Days.all();
     $ionicPush.register().then(function (t) {
@@ -435,7 +435,7 @@ IonicApp.controller('SideCtrl', function ($scope, $state, $ionicPush, $ionicPopu
     $scope.Loguser = $localstorage.get('LoginUser')
     $scope.email = $scope.Loguser.email;
     console.log($scope.email);
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
     $scope.childs = Childs.all();
     $scope.login = function () {
         $ionicPush.unregister();
@@ -448,7 +448,7 @@ IonicApp.controller('SideCtrl', function ($scope, $state, $ionicPush, $ionicPopu
     };
 })
 
-IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $ionicPopup, $ionicModal, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet, $ionicLoading) {
+IonicApp.controller('AccountCtrl', function ($scope, Users, $localstorage, $ionicPopup, $ionicModal, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice, $ionicPopup, $cordovaActionSheet, $ionicLoading) {
 
     if (!navigator.onLine) {
         console.log('false');
@@ -638,7 +638,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
     }
 
     $scope.changeimg = function () {
-        $scope.bucketListOne = new Firebase("https://pickup-dropoff.firebaseio.com/parents");
+        $scope.bucketListOne = new Firebase("https://homm-next-itservices.firebaseio.com/parents");
         $scope.bucketListOne.once('value', function (snapshot) {
             var data = snapshot.val();
             console.log(data);
@@ -647,7 +647,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
                     if (data[key].email === $scope.the.email) {
                         data[key].key = key;
                         console.log(data[key].key)
-                        var itemRef = new Firebase("https://pickup-dropoff.firebaseio.com/parents" + '/' + data[key].key);
+                        var itemRef = new Firebase("https://homm-next-itservices.firebaseio.com/parents" + '/' + data[key].key);
                         if ($scope.leveler === '1') {
                             itemRef.update({
                                 img: 'http://pudoworld.com/moblie/uploads/' + $scope.image,
@@ -669,7 +669,8 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
 
     $scope.second = {
         email: $scope.the.email2,
-        name: $scope.the.name2,
+        first_name: $scope.the.first_name2,
+        last_name: $scope.the.first_name2,
         phone: $scope.the.phone2,
         img: $scope.the.img2,
         password: $scope.the.password2
@@ -677,7 +678,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
 
     $scope.secondsave = function () {
         console.log($scope.second);
-        $scope.bucketListRef = new Firebase("https://pickup-dropoff.firebaseio.com/parents");
+        $scope.bucketListRef = new Firebase("https://homm-next-itservices.firebaseio.com/parents");
         $scope.bucketListRef.once('value', function (snapshot) {
             var data = snapshot.val();
             console.log(data);
@@ -686,9 +687,10 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
                     if (data[key].email === $scope.the.email) {
                         data[key].key = key;
                         console.log(data[key].key)
-                        var itemRef = new Firebase("https://pickup-dropoff.firebaseio.com/parents" + '/' + data[key].key);
+                        var itemRef = new Firebase("https://homm-next-itservices.firebaseio.com/parents" + '/' + data[key].key);
                         itemRef.update({
-                            name2: $scope.second.name,
+                            first_name2: $scope.second.first_name,
+                            last_name2: $scope.second.first_name,
                             email2: $scope.second.email,
                             phone2: $scope.second.phone,
                             password2: $scope.second.password
@@ -728,8 +730,8 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
                     text: '<b>Okay</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        $scope.bucketListRef = new Firebase("https://pickup-dropoff.firebaseio.com/parents");
-                        $scope.bucketListRef2 = new Firebase("https://pickup-dropoff.firebaseio.com/childs");
+                        $scope.bucketListRef = new Firebase("https://homm-next-itservices.firebaseio.com/parents");
+                        $scope.bucketListRef2 = new Firebase("https://homm-next-itservices.firebaseio.com/childs");
                         $scope.bucketListRef.once('value', function (snapshot) {
                             var data = snapshot.val();
                             console.log(data);
@@ -738,7 +740,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
                                     if (data[key].email === $scope.the.email) {
                                         data[key].key = key;
                                         console.log(data[key].key)
-                                        var itemRef = new Firebase("https://pickup-dropoff.firebaseio.com/parents" + '/' + data[key].key);
+                                        var itemRef = new Firebase("https://homm-next-itservices.firebaseio.com/parents" + '/' + data[key].key);
                                         itemRef.update({
                                             email: $scope.the.email,
                                             phone: $scope.the.phone
@@ -755,7 +757,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
                                     if (data[key].parent === $scope.the.email) {
                                         data[key].key = key;
                                         console.log(data[key].key)
-                                        var itemRef = new Firebase("https://pickup-dropoff.firebaseio.com/childs" + '/' + data[key].key);
+                                        var itemRef = new Firebase("https://homm-next-itservices.firebaseio.com/childs" + '/' + data[key].key);
                                         itemRef.update({
                                             approve: false,
                                             parent: $scope.the.email,
@@ -774,7 +776,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
     $scope.Loguser = $localstorage.get('LoginUser')
     $scope.email = $scope.Loguser.email;
     console.log($scope.email);
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
     $scope.settings = {
         enableFriends: $localstorage.get('enableFriends'),
         enableTrack: $localstorage.get('enableTrack')
@@ -789,7 +791,7 @@ IonicApp.controller('AccountCtrl', function ($scope, Parents, $localstorage, $io
     }
 })
 
-IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Parents, Schools, Days, $localstorage, $firebase, $ionicAuth, $ionicPush, $ionicUser) {
+IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Users, $http, Schools, Days, $localstorage, $firebase, $ionicAuth, $ionicPush, $ionicUser) {
 
     if (!navigator.onLine) {
         console.log('false');
@@ -810,7 +812,20 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
         });
     };
 
+    $scope.passrest = '';
+    $scope.passwordReset = function () {
+        $http({
+            method: 'GET',
+            url: 'https://pudoworld.com/view/resetpass2.php?email='+$scope.passrest,
+        }).then(function successCallback(response) {
+            console.log("msg sent!");
+        }, function errorCallback(response) {
+            console.log("error with sending a msg");
+        });
+    }
+
     $scope.days = Days.all();
+
     $scope.demogender = 'Male';
 
     function makeid() {
@@ -822,208 +837,102 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
 
         return text;
     }
+
+    function getidnumber() {
+        var currentTime = new Date();
+        var idnumber = 0 - currentTime.getTime();
+
+        return idnumber;
+    }
+
     $state.reload();
+
     $scope.loading = true;
-    $scope.access = function () {
-        $scope.Loguser = $localstorage.get('LoginUser');
-        $state.go('log.access');
-    };
+
     $scope.register = {
-        parent: {
+        users: {
             img: "https://png.icons8.com/guardian/dusk/400",
-            img2: "-",
-            email2: "email",
-            name2: "name",
-            password2: "password",
-            phone2: "phone"
-        },
-        student: {
-            address: {
-                dropoff: {
-                    address1: "",
-                    address2: "",
-                },
-                pickup: {
-                    address1: "",
-                    address2: "",
-                },
-            }
+            img2: "https://png.icons8.com/guardian/dusk/400",
+            email2: "",
+            first_name2: "",
+            last_name2: "",
+            password2: "",
+            phone2: "",
+            userid: 'U-' + makeid(),
+            id: getidnumber(),
         },
         status: 'unused',
     }
-    $scope.print = function () {
+
+    $scope.RegisterUser = function () {
         if (navigator.onLine) {
             setTimeout(function () {
                 $scope.loading = false;
                 console.log($scope.register);
-                $scope.datas = Parents.all();
+                $scope.datas = Users.all();
                 var details = {
-                    'email': $scope.register.parent.email,
-                    'password': $scope.register.parent.password,
+                    'email': $scope.register.users.email,
+                    'password': $scope.register.users.password,
                     'image': '',
-                    'name': $scope.register.parent.first_name + ' ' + $scope.register.parent.lastname
+                    'name': $scope.register.users.first_name + ' ' + $scope.register.users.last_name
                 };
                 console.log(details);
                 $ionicAuth.signup(details).then(function () {
-                    // `$ionicUser` is now registered
-                    $scope.addItem = function () {
-                        $scope.datas.$add($scope.register.parent);
-                    }
-
-                    $scope.addItem();
-                    $scope.datas2 = Childs.all();
-                    $scope.addItem2 = function () {
-                        if ($scope.register.student.gender === $scope.demogender) {
-                            $scope.register.student.face = "img/boy.png";
-                        } else {
-                            $scope.register.student.face = "img/girl.png";
+                        // `$ionicUser` is now registered
+                        $scope.addItem = function () {
+                            $scope.datas.$add($scope.register.users);
                         }
-                        $scope.datas2.$add({
-                            "address": {
-                                "dropoff": {
-                                    "address1": "$scope.register.",
-                                    "address2": "afterschool"
-                                },
-                                "pickup": {
-                                    "address1": "home1",
-                                    "address2": "home2"
-                                }
-                            },
-                            "approve": false,
-                            "class": $scope.register.student.class,
-                            "gender": $scope.register.student.gender,
-                            "face": $scope.register.student.face,
-                            "location": [],
-                            "name": $scope.register.student.name,
-                            "parent": $scope.register.parent.email,
-                            "route": {
-                                "monday": {
-                                    "id" : 0,
-                                    "late": $scope.days[0].late,
-                                    "status": $scope.days[0].status,
-                                    "dropoff": {
-                                        "address": $scope.days[0].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[0].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "tuesday": {
-                                    "id" : 1,
-                                    "late": $scope.days[1].late,
-                                    "status": $scope.days[1].status,
-                                    "dropoff": {
-                                        "address": $scope.days[1].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[1].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "wednesday": {
-                                    "id" : 2,
-                                    "late": $scope.days[2].late,
-                                    "status": $scope.days[2].status,
-                                    "dropoff": {
-                                        "address": $scope.days[2].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[2].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "thursday": {
-                                    "id" : 3,
-                                    "late": $scope.days[3].late,
-                                    "status": $scope.days[3].status,
-                                    "dropoff": {
-                                        "address": $scope.days[3].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[3].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "friday": {
-                                    "id" : 4,
-                                    "late": $scope.days[4].late,
-                                    "status": $scope.days[4].status,
-                                    "dropoff": {
-                                        "address": $scope.days[4].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[4].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "saturday": {
-                                    "id" : 5,
-                                    "late": $scope.days[5].late,
-                                    "status": $scope.days[5].status,
-                                    "dropoff": {
-                                        "address": $scope.days[5].dropoff,
-                                        "status": true
-                                    },
-                                    "pickup": {
-                                        "address": $scope.days[5].pickup,
-                                        "status": true
-                                    }
-                                },
-                                "sunday": {
-                                    "id" : 6,
-                                    "late": '',
-                                    "status": '',
-                                    "dropoff": {
-                                        "address": '',
-                                        "status": ''
-                                    },
-                                    "pickup": {
-                                        "address": '',
-                                        "status": ''
-                                    }
-                                },
+                        $scope.addItem();
 
-                            },
-                            "school": $scope.register.student.school,
-                            "status": "Awaiting Approval",
-                            "vendor": "none",
-                            "driver": "none",
-                            "time": 'none',
-                            "id": 'C-' + makeid(),
+                        $http({
+                            method: 'GET',
+                            url: 'https://pudoworld.com/view/mailing2.php?name=' + $scope.register.users.first_name + '&address=' + $scope.register.users.address1 + '&email=' + $scope.register.users.email + '&phone=' + $scope.register.users.phone + '&userid=' + $scope.register.users.userid,
+                        }).then(function successCallback(response) {
+                            console.log("msg sent!");
+                        }, function errorCallback(response) {
+                            console.log("error with sending a msg");
                         });
-                    }
-                    $scope.addItem2();
-                    $ionicPopup.show({
-                        template: '',
-                        title: 'Registration completed ',
-                        subTitle: 'Verification pending;',
-                        scope: $scope,
-                        buttons: [
-                            {
-                                text: '<b>Okay</b>',
-                                type: 'button-positive',
-                                onTap: function (e) {
-                                    $scope.loading = true;
-                                    $scope.prevSlide();
-                                }
+
+                        $ionicPopup.show({
+                            template: '',
+                            title: 'Registration completed ',
+                            subTitle: 'Thanks For Registering',
+                            scope: $scope,
+                            buttons: [
+                                {
+                                    text: '<b>Okay</b>',
+                                    type: 'button-positive',
+                                    onTap: function (e) {
+                                        $scope.loading = true;
+                                        $scope.prevSlide();
+                                    }
                         }
                     ]
-                    });
-                }, function (err) {
-                    for (var e of err.details) {
-                        if (e === 'conflict_email') {
-                            alert('Email already exists.');
-                        } else {
-                            // handle other errors
+                        });
+                    },
+                    function (err) {
+                        for (var e of err.details) {
+                            if (e === 'conflict_email') {
+                                $ionicPopup.show({
+                                    template: '',
+                                    title: 'conflict email',
+                                    subTitle: 'Email already exists..',
+                                    scope: $scope,
+                                    buttons: [
+                                        {
+                                            text: '<b>Okay</b>',
+                                            type: 'button-positive',
+                                            onTap: function (e) {
+                                                $scope.loading = true;
+                                            }
                         }
-                    }
-                });
+                    ]
+                                });
+                            } else {
+                                // handle other errors
+                            }
+                        }
+                    });
             })
         } else {
             console.log('false');
@@ -1044,256 +953,17 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
             });
         }
     }
-    $scope.print2 = function () {
-        if (navigator.onLine) {
-            $scope.parent = Parents.get($scope.register.parent.email);
-            console.log(parent);
-            if ($scope.parent === null) {
-                setTimeout(function () {
-                    $scope.loading = true;
-                    $ionicPopup.show({
-                        template: '',
-                        title: 'Login Error',
-                        subTitle: 'Username or Password wrong ;',
-                        scope: $scope,
-                        buttons: [
-                            {
-                                text: '<b>Okay</b>',
-                                type: 'button-positive',
-                                onTap: function (e) {
-                                    $scope.loading = true;
-                                }
-                        }
-                    ]
-                    });
-                }, 700);
-            } else {
-                $scope.loading = false;
-                if ($scope.register.parent.password === $scope.parent.password) {
-                    setTimeout(function () {
-                        $scope.loading = true;
-                        $scope.datas3 = Childs.all();
-                        $scope.addItem3 = function () {
-                            if ($scope.register.student.gender === $scope.demogender) {
-                                $scope.register.student.face = "img/boy.png";
-                            } else {
-                                $scope.register.student.face = "img/girl.png";
-                            }
-                            $scope.datas3.$add({
-                                "address": {
-                                    "dropoff": {
-                                        "address1": $scope.register.student.address.dropoff.address1 || "",
-                                        "address2": $scope.register.student.address.dropoff.address2 || ""
-                                    },
-                                    "pickup": {
-                                        "address1": $scope.register.student.address.pickup.address1 || "",
-                                        "address2": $scope.register.student.address.pickup.address2 || ""
-                                    }
-                                },
-                                "approve": false,
-                                "class": $scope.register.student.class,
-                                "gender": $scope.register.student.gender,
-                                "face": $scope.register.student.face,
-                                "location": [],
-                                "name": $scope.register.student.name,
-                                "parent": $scope.register.parent.email,
-                                "route": {
-                                    "monday": {
-                                    "id" : 0,
-                                        "late": $scope.days[0].late,
-                                        "status": $scope.days[0].status,
-                                        "dropoff": {
-                                            "address": $scope.days[0].dropoff,
-                                            "status": true
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[0].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "tuesday": {
-                                    "id" : 1,
-                                        "late": $scope.days[1].late,
-                                        "status": $scope.days[1].status,
-                                        "dropoff": {
-                                            "address": $scope.days[1].dropoff,
-                                            "status": true
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[1].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "wednesday": {
-                                    "id" : 2,
-                                        "late": $scope.days[2].late,
-                                        "status": $scope.days[2].status,
-                                        "dropoff": {
-                                            "address": $scope.days[2].dropoff,
-                                            "status": true
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[2].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "thursday": {
-                                    "id" : 3,
-                                        "late": $scope.days[3].late,
-                                        "status": $scope.days[3].status,
-                                        "dropoff": {
-                                            "address": $scope.days[3].dropoff,
-                                            "status": true
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[3].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "friday": {
-                                    "id" : 4,
-                                        "late": $scope.days[4].late,
-                                        "status": $scope.days[4].status,
-                                        "dropoff": {
-                                            "address": $scope.days[4].dropoff,
-                                            "status": true,
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[4].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "saturday": {
-                                    "id" : 5,
-                                        "late": $scope.days[5].late,
-                                        "status": $scope.days[5].status,
-                                        "dropoff": {
-                                            "address": $scope.days[5].dropoff,
-                                            "status": true
-                                        },
-                                        "pickup": {
-                                            "address": $scope.days[5].pickup,
-                                            "status": true
-                                        }
-                                    },
-                                    "sunday": {
-                                    "id" : 6,
-                                        "late": '',
-                                        "status": '',
-                                        "dropoff": {
-                                            "address": '',
-                                            "status": ''
-                                        },
-                                        "pickup": {
-                                            "address": '',
-                                            "status": ''
-                                        }
-                                    },
-
-                                },
-                                "school": $scope.register.student.school,
-                                "status": "Awaiting Approval",
-                                "vendor": "none",
-                                "driver": "none",
-                                "time": 'none',
-                                "id": 'C-' + makeid(),
-                            });
-                        }
-                        $scope.addItem3();
-                        $ionicPopup.show({
-                            template: '',
-                            title: 'Registration completed ',
-                            subTitle: 'Verification pending ;',
-                            scope: $scope,
-                            buttons: [{
-                                    text: '<b>Okay</b>',
-                                    type: 'button-positive',
-                                    onTap: function (e) {
-                                        $scope.loading = true;
-//                                        $scope.register = {
-//                                            parent: {
-//                                                img: "https://png.icons8.com/guardian/dusk/400",
-//                                                img2: "-",
-//                                                email2: "email",
-//                                                name2: "name",
-//                                                password2: "password",
-//                                                phone2: "phone"
-//                                            },
-//                                            student: {
-//                                                address: {
-//                                                    dropoff: {
-//                                                        address1: "",
-//                                                        address2: "",
-//                                                    },
-//                                                    pickup: {
-//                                                        address1: "",
-//                                                        address2: "",
-//                                                    },
-//                                                }
-//                                            },
-//                                            status: 'unused',
-//                                        }
-//
-//                                        $scope.modal2.hide();
-
-                                    }
-                        }
-                    ]
-                        });
-                    }, 700);
-                }else{
-                    $ionicPopup.show({
-                        template: '',
-                        title: 'Login Error',
-                        subTitle: 'Username or Password wrong ;',
-                        scope: $scope,
-                        buttons: [
-                            {
-                                text: '<b>Okay</b>',
-                                type: 'button-positive',
-                                onTap: function (e) {
-                                    $scope.loading = true;
-                                }
-                        }
-                    ]
-                    });
-                }
-            }
-        } else {
-            console.log('false');
-            $ionicPopup.show({
-                template: '',
-                title: 'Network Error',
-                subTitle: 'Please check your network connection and try again.',
-                scope: $scope,
-                buttons: [
-                    {
-                        text: '<b>Okay</b>',
-                        type: 'button-positive',
-                        onTap: function (e) {
-                            $scope.loading = true;
-                        }
-                        }
-                    ]
-            });
-        }
-    };
-    console.log($scope.register);
-    $scope.schools = Schools.all();
-
-    //    setInterval(function () {
-    //        console.log($scope.days[0].pickup);
-    //    }, 3000);
 
     $scope.user = {
         email: '',
         password: '',
     }
+
     $scope.signIn = function () {
         if (navigator.onLine) {
             console.log(parent);
-            $scope.parent = Parents.get($scope.user.email);
-            $scope.parent2 = Parents.get2($scope.user.email);
+            $scope.parent = Users.get($scope.user.email);
+            $scope.parent2 = Users.get2($scope.user.email);
             console.log($scope.parent2);
             $scope.loading = false;
             if ($scope.parent !== null) {
@@ -1319,7 +989,7 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
                         $ionicPopup.show({
                             template: '',
                             title: 'Welcome',
-                            subTitle: $scope.parent.lastname,
+                            subTitle: $scope.parent.last_name,
                             scope: $scope,
                             buttons: [{
                                     text: '<b>Okay</b>',
@@ -1375,7 +1045,7 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
                                 email: $scope.parent2.email,
                                 email2: $scope.parent2.email2,
                                 first_name: $scope.parent2.name2,
-                                lastname: $scope.parent2.name2,
+                                last_name: $scope.parent2.name2,
                                 img: $scope.parent2.img2,
                                 img2: $scope.parent2.img2,
                                 name: $scope.parent2.name2,
@@ -1456,20 +1126,20 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
                     $scope.loading = true;
 
                     $ionicPopup.show({
-                                template: '',
-                                title: 'Login Error',
-                                subTitle: 'Username or Password wrong ;',
-                                scope: $scope,
-                                buttons: [
-                                    {
-                                        text: '<b>Okay</b>',
-                                        type: 'button-positive',
-                                        onTap: function (e) {
-                                            $scope.loading = true;
-                                        }
+                        template: '',
+                        title: 'Login Error',
+                        subTitle: 'Username or Password wrong ;',
+                        scope: $scope,
+                        buttons: [
+                            {
+                                text: '<b>Okay</b>',
+                                type: 'button-positive',
+                                onTap: function (e) {
+                                    $scope.loading = true;
+                                }
                         }
                     ]
-                            });
+                    });
                 }
             }
         } else {
@@ -1527,7 +1197,7 @@ IonicApp.controller('LoginCtrl', function ($scope, $state, $ionicModal, $ionicPo
     }
 })
 
-IonicApp.controller('AccessCtrl', function ($scope, $state, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Parents, Schools, Days, $localstorage) {
+IonicApp.controller('AccessCtrl', function ($scope, $state, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Users, Schools, Days, $localstorage) {
 
     $scope.childs = Childs.all()
     $scope.backlogin = function () {
@@ -1545,7 +1215,7 @@ IonicApp.controller('AccessCtrl', function ($scope, $state, $ionicModal, $ionicP
 
     console.log($scope.childs);
     $scope.viewSchool = function () {
-        $scope.bucketListOne = new Firebase("https://pickup-dropoff.firebaseio.com/childs");
+        $scope.bucketListOne = new Firebase("https://homm-next-itservices.firebaseio.com/childs");
         $scope.bucketListOne.once('value', function (snapshot) {
             var data = snapshot.val();
             console.log(data);
@@ -1569,7 +1239,7 @@ IonicApp.controller('AccessCtrl', function ($scope, $state, $ionicModal, $ionicP
     $scope.viewSchool();
 })
 
-IonicApp.controller('AccessDetailCtrl', function ($scope, $state, $stateParams, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Parents, Schools, Days, $localstorage) {
+IonicApp.controller('AccessDetailCtrl', function ($scope, $state, $stateParams, $ionicModal, $ionicPopup, Schools, Childs, $ionicSlideBoxDelegate, Users, Schools, Days, $localstorage) {
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
         scope: $scope
@@ -1595,7 +1265,7 @@ IonicApp.controller('AccessDetailCtrl', function ($scope, $state, $stateParams, 
     console.log($localstorage.get('AccessUser'));
     $scope.the = $localstorage.get('AccessUser');
     console.log($scope.the);
-    $scope.parent = Parents.all();
+    $scope.parent = Users.all();
     console.log($scope.currentSch);
 
 })
@@ -1620,37 +1290,37 @@ IonicApp.controller('MapCtrl', function ($scope, $ionicPopup) {
         });
     };
 
-//
-//    $scope.initMap = function () {
-//        var center = new google.maps.LatLng(51.514032, -0.128383);
-//        var circle = new google.maps.Circle({
-//            center: center,
-//            radius: 50
-//        });
-//
-//        var options = {
-//            types: ['geocode']
-//        }
-//
-//        var input = document.getElementById('autocomplete');
-//        var autocomplete = new google.maps.places.Autocomplete(input, options);
-//        autocomplete.setBounds(circle.getBounds());
-//
-//        var input2 = document.getElementById('autocomplete2');
-//        var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
-//        autocomplete2.setBounds(circle.getBounds());
-//
-//        var input3 = document.getElementById('autocomplete3');
-//        var autocomplete3 = new google.maps.places.Autocomplete(input3, options);
-//        autocomplete3.setBounds(circle.getBounds());
-//
-//        var input4 = document.getElementById('autocomplete4');
-//        var autocomplete4 = new google.maps.places.Autocomplete(input4, options);
-//        autocomplete4.setBounds(circle.getBounds());
-//
-//    }
-//    var mapDiv = document.getElementById('addChild');
-//    google.maps.event.addDomListener(mapDiv, 'click', $scope.initMap);
+    //
+    //    $scope.initMap = function () {
+    //        var center = new google.maps.LatLng(51.514032, -0.128383);
+    //        var circle = new google.maps.Circle({
+    //            center: center,
+    //            radius: 50
+    //        });
+    //
+    //        var options = {
+    //            types: ['geocode']
+    //        }
+    //
+    //        var input = document.getElementById('autocomplete');
+    //        var autocomplete = new google.maps.places.Autocomplete(input, options);
+    //        autocomplete.setBounds(circle.getBounds());
+    //
+    //        var input2 = document.getElementById('autocomplete2');
+    //        var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
+    //        autocomplete2.setBounds(circle.getBounds());
+    //
+    //        var input3 = document.getElementById('autocomplete3');
+    //        var autocomplete3 = new google.maps.places.Autocomplete(input3, options);
+    //        autocomplete3.setBounds(circle.getBounds());
+    //
+    //        var input4 = document.getElementById('autocomplete4');
+    //        var autocomplete4 = new google.maps.places.Autocomplete(input4, options);
+    //        autocomplete4.setBounds(circle.getBounds());
+    //
+    //    }
+    //    var mapDiv = document.getElementById('addChild');
+    //    google.maps.event.addDomListener(mapDiv, 'click', $scope.initMap);
 
 });
 
@@ -1675,35 +1345,35 @@ IonicApp.controller('MapCtrled', function ($scope, $ionicPopup) {
         });
     };
 
-//
-//    $scope.initMap = function () {
-//        var center = new google.maps.LatLng(51.514032, -0.128383);
-//        var circle = new google.maps.Circle({
-//            center: center,
-//            radius: 50
-//        });
-//
-//        var options = {
-//            types: ['geocode']
-//        }
-//
-//        var input5 = document.getElementById('autocomplete5');
-//        var autocomplete5 = new google.maps.places.Autocomplete(input5, options);
-//        autocomplete5.setBounds(circle.getBounds());
-//
-//        var input6 = document.getElementById('autocomplete6');
-//        var autocomplete6 = new google.maps.places.Autocomplete(input6, options);
-//        autocomplete6.setBounds(circle.getBounds());
-//
-//        var input7 = document.getElementById('autocomplete7');
-//        var autocomplete7 = new google.maps.places.Autocomplete(input7, options);
-//        autocomplete7.setBounds(circle.getBounds());
-//
-//        var input8 = document.getElementById('autocomplete8');
-//        var autocomplete8 = new google.maps.places.Autocomplete(input8, options);
-//        autocomplete8.setBounds(circle.getBounds());
-//    }
-//    var mapDiv = document.getElementById('addParent');
-//    google.maps.event.addDomListener(mapDiv, 'click', $scope.initMap);
+    //
+    //    $scope.initMap = function () {
+    //        var center = new google.maps.LatLng(51.514032, -0.128383);
+    //        var circle = new google.maps.Circle({
+    //            center: center,
+    //            radius: 50
+    //        });
+    //
+    //        var options = {
+    //            types: ['geocode']
+    //        }
+    //
+    //        var input5 = document.getElementById('autocomplete5');
+    //        var autocomplete5 = new google.maps.places.Autocomplete(input5, options);
+    //        autocomplete5.setBounds(circle.getBounds());
+    //
+    //        var input6 = document.getElementById('autocomplete6');
+    //        var autocomplete6 = new google.maps.places.Autocomplete(input6, options);
+    //        autocomplete6.setBounds(circle.getBounds());
+    //
+    //        var input7 = document.getElementById('autocomplete7');
+    //        var autocomplete7 = new google.maps.places.Autocomplete(input7, options);
+    //        autocomplete7.setBounds(circle.getBounds());
+    //
+    //        var input8 = document.getElementById('autocomplete8');
+    //        var autocomplete8 = new google.maps.places.Autocomplete(input8, options);
+    //        autocomplete8.setBounds(circle.getBounds());
+    //    }
+    //    var mapDiv = document.getElementById('addParent');
+    //    google.maps.event.addDomListener(mapDiv, 'click', $scope.initMap);
 
 });

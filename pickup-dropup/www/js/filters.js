@@ -7,11 +7,11 @@ IonicApp.filter('numKeys', function() {
     }
 })
 
-IonicApp.filter('capitalize', function() {
-    return function(input) {
-      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
-});
+//IonicApp.filter('capitalize', function() {
+//    return function(input) {
+//      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : ' ';
+//    }
+//});
 
 IonicApp.filter('orderObjectBy', function() {
   return function(items, field, reverse) {
@@ -69,5 +69,25 @@ IonicApp.filter('offset', function() {
     start = parseInt(start, 10);
     return input.slice(start);
   };
-});
+})
+
+ IonicApp.filter('capitalize', function() {
+    return function(input, all) {
+      var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+      return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+  })
+
+
+IonicApp.filter( 'camelCase', function ()
+             {
+                 var camelCaseFilter = function ( input )
+                 {
+                     var words = input.split( ' ' );
+                     for ( var i = 0, len = words.length; i < len; i++ )
+                         words[i] = words[i].charAt( 0 ).toUpperCase() + words[i].slice( 1 );
+                     return words.join( ' ' );
+                 };
+                 return camelCaseFilter;
+             } )
 

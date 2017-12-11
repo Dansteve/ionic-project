@@ -13,9 +13,10 @@
        <div ng-if="the.email">
           <div class="list" style="margin-top: 60px; border: none">
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="sch in viewsch | unique:'school'" type="item-text-wrap" ng-class-even="'item-stable'"  style="padding-top: 2px;padding-bottom: 2px;" href="#/log/access/{{sch.school.$id}}">
-                <img ng-src="img/ionic.png">
-                <h2>{{sch.school.name}}</h2>
-                 <p style="margin-bottom: 0px;">Address : {{sch.school.address}}</p>
+                 <img ng-src="img/ionic.png" ng-if="sch.school.img === ''">
+                 <img ng-src="https://pudoworld.com/view/uploads/{{sch.school.img}}" ng-if="sch.school.img !== ''">
+                <h2>{{sch.school.name | capitalize}}</h2>
+                 <p style="margin-bottom: 0px;">Address : {{sch.school.address | capitalize}}</p>
 <!--              <p style="margin-bottom: 0px;">Class : {{child.class}}</p>-->
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>

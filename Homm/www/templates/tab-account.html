@@ -1,5 +1,5 @@
 <ion-view view-title="Account">
-    <ion-content style="background: rgba(56, 126, 245, 0.09);" ng-init="childlist = false;detail = true;Second = false ;Accountscontrol=false">
+    <ion-content class="bodybackground" ng-init="detail,childlist,Second = false ;Accountscontrol=false" padding="true">
         <ion-list style="background: rgba(56, 126, 245, 0.09);">
             <div class="item item-image padding">
                 <img src="{{Loguser.img}}" class="profile" ng-click="modal.show()">
@@ -19,10 +19,10 @@
             <div id="detail" ng-show="detail">
                 <label class="item item-input">
                 <span class="input-label">First name : </span>
-                <input type="text" value="{{Loguser.first_name}}" ng-disabled="true">
+                <input type="text" value="{{Loguser.first_name}}">
               </label><label class="item item-input">
                 <span class="input-label">Last name : </span>
-                <input type="text" value="{{Loguser.lastname}}" ng-disabled="true">
+                <input type="text" value="{{Loguser.last_name}}">
               </label><label class="item item-input">
                 <span class="input-label">Email : </span>
                 <input type="email" value="{{Loguser.email}}" ng-model="the.email" ng-disabled="leveler !== '1'">
@@ -40,11 +40,15 @@
             </div>
             <form id="Accounts control" ng-show="Second" name="steve" ng-show="leveler == 1">
                 <label class="item item-input">
-                <span class="input-label">Fullname : </span>
-                <input type="text" ng-value="second.name" ng-model="second.name" required>
+                <span class="input-label">First name : </span>
+                <input type="text" ng-value="second.first_name" ng-model="second.first_name" required>
               </label>
                 <label class="item item-input">
-                <span class="input-label">Second Email : </span>
+                <span class="input-label">Last name : </span>
+                <input type="text" ng-value="second.last_name" ng-model="second.last_name" required>
+              </label>
+                <label class="item item-input">
+                <span class="input-label">Email : </span>
                 <input type="email" ng-value="second.email" ng-model="second.email" required>
               </label>
                 <label class="item item-input">
@@ -63,23 +67,6 @@
                   Save
                 </button>
             </form>
-            <div class="item item-divider" ng-show="leveler == 1" ng-click="childlist = !childlist;detail= false;Second=false;Accountscontrol=false;">
-                List of child(ren)
-            </div>
-            <div class="list" ng-show="childlist">
-                <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email}" type="item-text-wrap" href="#/tab/dash/{{child.$id}}" ng-class-even="'item-stable'" ng-if="child.approve">
-                    <img ng-src="{{child.face}}">
-                    <h2>{{child.name}}</h2>
-                    <p>Child-id : {{child.id}}</p>
-                    <a class="subdued" >Active</a>
-                </ion-item>
-                <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email}" type="item-text-wrap" ng-class-even="'item-stable'" ng-if="!child.approve">
-                    <img ng-src="{{child.face}}">
-                    <h2>{{child.name}}</h2>
-                    <p>Child-id : {{child.id}}</p>
-                    <a class="subdued" >Awaiting approval or Suspended</a>
-                </ion-item>
-            </div>
             <div class="item item-divider" ng-click="Accountscontrol = !Accountscontrol;Second=false;detail=false;childlist = false;">
                 Accounts control
             </div>

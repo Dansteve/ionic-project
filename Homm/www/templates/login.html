@@ -1,5 +1,5 @@
 <ion-view view-title="log-login">
-    <ion-content scroll="false" class="login" ng-init="parent = true;child = false;location = false;filter.all = true;">
+    <ion-content scroll="false" class="login" ng-init="users = true;child = false;location = false;filter.all = true;">
         <ion-slides options="options" slider="data.slider" class="box">
             <ion-slide-page>
                 <div>
@@ -13,28 +13,19 @@
                             <input type="password" ng-model="user.password">
                           </label>
                         <div style="text-align: center" ng-class="{'show': loading == true}">
-                            <ion-spinner icon="circles"></ion-spinner>
+                            <ion-spinner icon="circles" class="spinner-postive"></ion-spinner>
                         </div>
                         <div class="padding">
                             <button class="button button-block button-positive" ng-click="signIn()" ng-disabled="!user.email || !user.password">
                           Sign-In
                             </button>
-                            <!--
-                            <button class="button button-block button-positive" ng-click="login()" >
-                          login
-                            </button>
--->
                             <p class="text-center">
-                                <a href="#/forgot-password" ng-click="modal.show()">Forgot password</a>
+                                <a href="#/forgot-password" ng-click="modal.show()" style="color: #a2a2a2;
+    text-decoration: none;
+    font-size: 18px;">Forgot Password</a>
                             </p>
-                            <button class="button button-block button-positive" ng-click="nextSlide()" id="addParent">
-                          Sign-Up
-                            </button>
                             <button class="button button-block button-positive" ng-click="modal2.show();" id="addChild">
-                          Add a Child
-                            </button>
-                            <button class="button button-block button-positive" ng-click="access()">
-                            Access
+                          Register
                             </button>
                         </div>
                     </div>
@@ -49,284 +40,77 @@
                             <p class="name" id="name">if you've lost your password or wish to reset it,enter email address or phone number to get started. <br><br></p>
                             <div class="list">
                                 <label class="item item-input">
-                          <input ng-model="newUser.email" type="email" placeholder="Email or Phone number">
+                          <input ng-model="passrest" type="email" placeholder="Email">
                         </label>
-                                <button class="button button-full button-positive" ng-click="createContact(newUser);modal.hide();">Reset</button>
-                                <button class="button button-full button-stable" ng-click="createContact(newUser);modal.hide();">Cancel</button>
+                                <button class="button button-full button-positive" ng-click="passwordReset();modal.hide();">Reset</button>
+                                <button class="button button-full button-stable" ng-click="modal.hide();">Cancel</button>
                             </div>
                         </ion-content>
                     </ion-modal-view>
                 </script>
                 <script id="templates/modal2.html" type="text/ng-template">
-                    <ion-modal-view ng-init="parent2 = true;showDay = false" ng-class="{'full': true}">
+                    <ion-modal-view ng-init="users2 = true;showDay = false" ng-class="{'full': true}">
                         <ion-header-bar class="bar bar-header bar-positive">
-                            <h1 class="title">Child Register</h1>
+                            <h1 class="title">Register</h1>
                             <button class="button button-clear button-primary" ng-click="modal2.hide()">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="" style="background: rgba(107, 70, 229, 0.05);">
                             <div>
-                                <form name="childss" novalidate>
-                                    <div class="item item-divider item-divider-home" ng-click="child2 = false ;location2 = false ;parent2 = !parent2; Schedule2 = false" style="margin-bottom: 10px;">
-                                        Parent's details
+                                <form name="Userform" novalidate>
+                                    <div class="item item-divider item-divider-home" ng-click="child2 = false ;location2 = false ;users2 = !users2; Schedule2 = false" style="margin-bottom: 10px;">
+                                        User's details
                                     </div>
-                                    <div ng-show="parent2">
-                                        <label class="item item-input white item-stacked-label" ng-class="{ 'has-error' : childss.email.$invalid && !childss.email.$pristine }">
-                            <span class="input-label">Email</span>
-                            <input type="email" placeholder="john@suhr.com" ng-model="register.parent.email" name="email">
-                            <span ng-show="childss.email.$invalid && !childss.email.$pristine" class="help-block">invaild email.</span>
-                          </label>
-                                        <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" placeholder="password" ng-model="register.parent.password">
-                          </label>
+                                    <div ng-show="users2">
+                                    <label class="item item-input white item-stacked-label">
+                                        <span class="input-label">First Name</span>
+                                        <input type="text" placeholder="John" ng-model="register.users.first_name">
+                                      </label>
+                                    <label class="item item-input white item-stacked-label">
+                                        <span class="input-label">Last Name</span>
+                                        <input type="text" placeholder="John" ng-model="register.users.last_name">
+                                      </label>
+                                    <label class="item item-input white item-stacked-label" ng-class="{ 'has-error' : Userform.email.$invalid && !Userform.email.$pristine }">
+                                        <span class="input-label">Email</span>
+                                        <input type="email" placeholder="john@suhr.com" ng-model="register.users.email" name="email">
+                                        <span ng-show="Userform.email.$invalid && !Userform.email.$pristine" class="help-block">invaild email.</span>
+                                      </label>
+                                    <label class="item item-input white item-stacked-label">
+                                        <span class="input-label">phone</span>
+                                        <input type="number" placeholder="+2348259992635" ng-model="register.users.phone" name="phone">
+                                      </label>
+                                    <label class="item item-input white item-stacked-label">
+                                        <span class="input-label">Password</span>
+                                        <input type="password" placeholder="password" ng-model="register.users.password">
+                                      </label>
+                                    <label class="item item-input item-select">
+                                    <div class="input-label">
+                                      Gender
                                     </div>
-                                    <div class="item item-divider item-divider-home" ng-click="child2 = !child2 ; parent2 = false; location2 = false; Schedule2 = false" style="margin-bottom: 10px;">
-                                        Child's details
+                                    <select required  ng-model="register.users.gender">
+                                      <option ng-value="male" value="male">Male</option>
+                                      <option ng-value="female" value="male">Female</option>
+                                    </select>
+                                  </label>
                                     </div>
-                                    <div ng-show="child2">
-                                        <div class="list padding" style="padding: 0px 0px 10px 0px;">
-                                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Full Name</span>
-                            <input type="text" placeholder="John" ng-model="register.student.name">
-                          </label>
-                                            <label class="item item-input item-select">
-                            <div class="input-label">
-                              Gender
-                            </div>
-                            <select required  ng-model="register.student.gender">
-                              <option ng-value="male" value="male">Male</option>
-                              <option ng-value="female" value="male">Female</option>
-                            </select>
-                          </label><label class="item item-input item-select">
-                            <div class="input-label">
-                              School Name
-                            </div>
-                            <select required  ng-model="register.student.school">
-                              <option ng-repeat="school in schools | orderBy : 'name'" value="{{school.id}}">{{school.name}} {{school.city}}</option>
-                            </select>
-                          </label>
-                                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Class</span>
-                            <input type="text" placeholder="Grade One"  ng-model="register.student.class">
-                          </label>
+                                    <div class="list padding" style="padding: 0px 0px 10px 0px;" ng-controller="MapCtrl">
+                                        <div class="item item-divider">
+                                            Address <span class="bus_service">(Include City & Country)</span>
                                         </div>
+                                        <label class="item item-input white item-stacked-label">
+                                            <span class="input-label">Address</span>
+                                            <input type="text" placeholder="address One" ng-model="register.users.address1" id="autocomplete">
+                                        </label>
+                                        <label class="item item-input white item-stacked-label">
+                                            <span class="input-label" >Alternative address</span>
+                                            <input type="text" placeholder="alternative address" ng-model="register.users.address2" id="autocomplete2">
+                                        </label>
                                     </div>
                                 </form>
-                                <div class="item item-divider item-divider-home" ng-click="location2 = !location2 ; parent2 = false ; child2 = false;Schedule2 = false" style="margin-bottom: 10px;">
-                                    Child's location <span class="bus_service">(Bus Service Only)</span>
-                                </div>
-                                <div ng-show="location2">
-                                    <div class="list padding" style="padding: 0px 0px 10px 0px;"  ng-controller="MapCtrl">
-                                        <div class="item item-divider">
-                                            Pick Up <span class="bus_service">(Include City & Country)</span>
-                                        </div>
-                                        <label class="item item-input white item-stacked-label" >
-                            <span class="input-label">Address</span>
-                            <input type="text" placeholder="address One" ng-model="register.student.address.pickup.address1" id="autocomplete">
-                          </label>
-                                        <label class="item item-input white item-stacked-label">
-                            <span class="input-label" >Alternative address</span>
-                            <input type="text" placeholder="alternative address" ng-model="register.student.address.pickup.address2" id="autocomplete2">                         </label>
-                                        <div class="item item-divider" ng-click="">
-                                            Drop Off <span class="bus_service">(Include City & Country)</span>
-                                        </div>
-                                        <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Address</span>
-                            <input type="text" placeholder="address One" ng-model="register.student.address.dropoff.address1" id="autocomplete3">
-                          </label>
-                                        <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Alternative address</span>
-                            <input type="text" placeholder="alternative address" ng-model="register.student.address.dropoff.address2" id="autocomplete4">
-                          </label>
-                                    </div>
-                                </div>
-                                <div class="item item-divider item-divider-home" ng-click="Schedule2 = !Schedule2;location2 = false ; parent2 = false ; child2 = false">
-                                    Childs Schedule <span class="bus_service">(Bus Service Only)</span>
-                                </div>
-                                <div ng-show="Schedule2">
-                                    <ion-list>
-<!--                                        <ion-checkbox ng-model="filter.all">Every Day (uncheck to select day(s)) </ion-checkbox>-->
-                                        <div ng-repeat="day in days">
-                                            <ion-checkbox ng-model="day.status" >{{day.name | capitalize}}
-                                            </ion-checkbox>
-                                            <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  pickup address
-                                                </div>
-                                                <select required  ng-model="day.pickup" >
-                                              <option ng-selected="true">{{register.student.address.pickup.address1}}</option>
-                                              <option>{{register.student.address.pickup.address2}}</option>
-                                            </select>
-                                          </label>
-                                            <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  dropoff address
-                                                </div>
-                                                <select required ng-model="day.dropoff" >
-                                              <option ng-selected="true">{{register.student.address.dropoff.address1}}</option>
-                                              <option>{{register.student.address.dropoff.address2}}</option>
-                                            </select>
-                                          </label>
-                                <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  Late Pickup
-                                                </div>
-                                             <select required ng-model="day.late">
-                                              <option ng-value="false" value="false" ng-selected="true">false</option>
-                                              <option ng-value="true" value="true">true</option>
-                                            </select>
-                                </label>
-                                        </div>
-                                    </ion-list>
-                                </div>
-                                <button class="button button-full button-positive" ng-click="print2()" ng-disabled="!register.parent.email || !register.parent.password || !register.student.name || !register.student.class || !register.student.gender || !register.student.school">Send</button>
-
+                                <button class="button button-full button-positive" ng-click="RegisterUser()" ng-disabled="!register.users.email || !register.users.password ">Send</button>
                             </div>
                         </ion-content>
                     </ion-modal-view>
                 </script>
-            </ion-slide-page>
-            <ion-slide-page ng-controller="MapCtrled">
-                        <ion-header-bar class="bar bar-header bar-positive">
-                    <button class="button button-icon icon ion-ios-arrow-back" ng-click="prevSlide()"> Login</button>
-                    <h1 class="title">Parent Register</h1>
-                     </ion-header-bar>
-                <ion-scroll style=" height: 130% !important;" id="mee">
-                    <div class="item item-divider item-divider-home" ng-click="child = false ;location = false ;parent = !parent; Schedule = false" style="margin-top: 50px;margin-bottom: 10px;">
-                        Parent's details
-                    </div>
-                    <form name="userForm" novalidate>
-                        <div ng-show="parent">
-                            <div class="list padding" style="padding: 0px 0px 10px 0px;">
-                                <label class="item item-input white item-stacked-label">
-                            <span class="input-label">First Name</span>
-                            <input type="text" placeholder="John" ng-model="register.parent.first_name" name="fname">
-                          </label>
-                                <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Last Name</span>
-                            <input type="text" placeholder="Suhr" ng-model="register.parent.lastname" name="lname">
-                          </label>
-                                <label class="item item-input white item-stacked-label" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-                            <span class="input-label">Email</span>
-                            <input type="email" placeholder="john@suhr.com" ng-model="register.parent.email" name="email">
-                            <span ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">invaild email.</span>
-                          </label>
-                                <label class="item item-input white item-stacked-label" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
-                            <span class="input-label">Phone</span>
-                            <input type="tel" placeholder="+2345678290" name="phone" ng-model="register.parent.phone" pattern="^(\+?)(?:\(\d{3}\)|\d{3})[- ]?\d{5}[- ]?\d*$">
-                            <span ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">invaild phone number.</span>
-                          </label>
-                                <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" placeholder="password" ng-model="register.parent.password">
-                          </label>
-                            </div>
-                        </div>
-                        <div class="item item-divider item-divider-home" ng-click="child = !child ; parent = false; location = false; Schedule = false" style="margin-bottom: 10px;">
-                            Child's details
-                        </div>
-                        <div ng-show="child">
-                            <div class="list padding" style="padding: 0px 0px 10px 0px;">
-                                <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Full Name</span>
-                            <input type="text" placeholder="John" ng-model="register.student.name">
-                          </label>
-                                <label class="item item-input item-select">
-                            <div class="input-label">
-                              Gender
-                            </div>
-                            <select required  ng-model="register.student.gender">
-                              <option ng-value="male" value="male" >Male</option>
-                              <option ng-value="female" value="female" >Female</option>
-                            </select>
-                          </label><label class="item item-input item-select">
-                            <div class="input-label">
-                              School Name
-                            </div>
-                            <select required  ng-model="register.student.school">
-                              <option ng-repeat="school in schools | orderBy : 'name'" value="{{school.id}}">{{school.name}} {{school.city}}</option>
-                            </select>
-                          </label>
-                                <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Class</span>
-                            <input type="text" placeholder="Grade One"  ng-model="register.student.class">
-                          </label>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="item item-divider item-divider-home" ng-click="location = !location ; parent = false ; child = false;Schedule = false" style="margin-bottom: 10px;">
-                        Child's location <span class="bus_service">(Bus Service Only)</span>
-                    </div>
-                    <div ng-show="location">
-                        <div class="list padding" style="padding: 0px 0px 10px 0px;">
-                            <div class="item item-divider">
-                                Pick Up <span class="bus_service">(Include City & Country)</span>
-                            </div>
-                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Address</span>
-                            <input type="text" placeholder="address One" ng-model="register.student.address.pickup.address1" id="autocomplete5">
-                          </label>
-                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label" >Alternative address</span>
-                            <input type="text" placeholder="alternative address" ng-model="register.student.address.pickup.address2" id="autocomplete6">
-                          </label>
-                            <div class="item item-divider" ng-click="">
-                                Drop Off <span class="bus_service">(Include City & Country)</span>
-                            </div>
-                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Address</span>
-                            <input type="text" placeholder="address One" ng-model="register.student.address.dropoff.address1" id="autocomplete7">
-                          </label>
-                            <label class="item item-input white item-stacked-label">
-                            <span class="input-label">Alternative address</span>
-                            <input type="text" placeholder="alternative address" ng-model="register.student.address.dropoff.address2" id="autocomplete8">
-                          </label>
-                        </div>
-                    </div>
-                    <div class="item item-divider item-divider-home" ng-click="Schedule = !Schedule;location = false ; parent = false ; child = false">
-                        Childs Schedule <span class="bus_service">(Bus Service Only)</span>
-                    </div>
-                    <div ng-show="Schedule">
-                        <ion-list>
-<!--                            <ion-checkbox ng-model="filter.all">Every Day (Uncheck to select day(s) )</ion-checkbox>-->
-                            <div ng-repeat="day in days">
-                                <ion-checkbox ng-model="day.status">{{day.name | capitalize}}
-                                </ion-checkbox>
-                                <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  pickup address
-                                                </div>
-                                                <select required ng-model="day.pickup">
-                                              <option ng-selected="true">{{register.student.address.pickup.address1}}</option>
-                                              <option>{{register.student.address.pickup.address2}}</option>
-                                            </select>
-                                          </label>
-                                <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  dropoff address
-                                                </div>
-                                                <select required ng-model="day.dropoff">
-                                              <option ng-selected="true">{{register.student.address.dropoff.address1}}</option>
-                                              <option>{{register.student.address.dropoff.address2}}</option>
-                                            </select>
-                                          </label>
-                                <label class="item item-input item-select" ng-if="day.status">
-                                                <div class="input-label">
-                                                  Late Pickup
-                                                </div>
-                                             <select required ng-model="day.late">
-                                              <option ng-value="false" value="false" ng-selected="true">false</option>
-                                              <option ng-value="true" value="true">true</option>
-                                            </select>
-                                </label>
-                            </div>
-                        </ion-list>
-                    </div>
-                    <div style="text-align: center" ng-class="{'show': loading == true}">
-                        <ion-spinner icon="circles"></ion-spinner>
-                    </div>
-                    <button class="button button-full button-positive" ng-click="print()" ng-disabled="!register.parent.email || !register.parent.password || !register.student.name || !register.student.class || !register.student.gender || !register.student.school ">Send</button>
-                </ion-scroll>
             </ion-slide-page>
         </ion-slides>
     </ion-content>

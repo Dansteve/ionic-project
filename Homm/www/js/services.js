@@ -1,12 +1,12 @@
 var IonicApp = angular.module('starter.services', ['firebase']);
 
 IonicApp.factory("Auth", function ($firebaseAuth) {
-    var usersRef = new Firebase("https://pickup-dropoff.firebaseio.com/");
+    var usersRef = new Firebase("https://homm-next-itservices.firebaseio.com/");
     return $firebaseAuth(usersRef);
 })
 
 IonicApp.factory("Feeds", function ($firebaseArray) {
-            var itemsRef = new Firebase("https://pickup-dropoff.firebaseio.com/feed").orderByChild('dateme');
+            var itemsRef = new Firebase("https://homm-next-itservices.firebaseio.com/feed").orderByChild('dateme');
             var feed = $firebaseArray(itemsRef);
             return {
                 all: function () {
@@ -100,9 +100,9 @@ IonicApp.factory("Days", function () {
     };
 })
 
-IonicApp.factory('Childs', function ($firebaseArray) {
+IonicApp.factory('Childs', function ($firebaseArray, $firebase) {
     // Might use a resource here that returns a JSON array
-    var item = new Firebase("https://pickup-dropoff.firebaseio.com/childs");
+    var item = new Firebase("https://homm-next-itservices.firebaseio.com/childs");
     // Some fake testing data
     var childs = $firebaseArray(item);
     return {
@@ -123,9 +123,9 @@ IonicApp.factory('Childs', function ($firebaseArray) {
     };
 })
 
-IonicApp.factory('Parents', function ($firebaseArray, $firebase) {
+IonicApp.factory('Users', function ($firebaseArray, $firebase) {
     // Might use a resource here that returns a JSON array
-    var item = new Firebase("https://pickup-dropoff.firebaseio.com/parents");
+    var item = new Firebase("https://homm-next-itservices.firebaseio.com/users");
     // Some fake testing data
     var childs = $firebaseArray(item);
     return {
@@ -152,7 +152,7 @@ IonicApp.factory('Parents', function ($firebaseArray, $firebase) {
             return null;
         },
         //      update: function(){
-        //          var ref = $firebaseArray.ref("https://pickup-dropoff.firebaseio.com/").child('schools');
+        //          var ref = $firebaseArray.ref("https://homm-next-itservices.firebaseio.com/").child('schools');
         //          ref.once("value")
         //            .then(function(snapshot) {
         //            var key = snapshot.key; // "ada"
@@ -165,7 +165,7 @@ IonicApp.factory('Parents', function ($firebaseArray, $firebase) {
 
 IonicApp.factory('Schools', function ($firebaseArray) {
     // Might use a resource here that returns a JSON array
-    var item = new Firebase("https://pickup-dropoff.firebaseio.com/schools");
+    var item = new Firebase("https://homm-next-itservices.firebaseio.com/schools");
     // Some fake testing data
     var childs = $firebaseArray(item);
     return {
@@ -196,7 +196,7 @@ IonicApp.factory('Schools', function ($firebaseArray) {
 
 IonicApp.factory('Drivers', function ($firebaseArray) {
     // Might use a resource here that returns a JSON array
-    var item = new Firebase("https://pickup-dropoff.firebaseio.com/drivers");
+    var item = new Firebase("https://homm-next-itservices.firebaseio.com/drivers");
     // Some fake testing data
     var childs = $firebaseArray(item);
     return {
@@ -223,7 +223,7 @@ IonicApp.factory('Drivers', function ($firebaseArray) {
             return null;
         },
 //        loaction: function (aid) {
-//            var url = "https://pickup-dropoff.firebaseio.com/drivers/"+aid;
+//            var url = "https://homm-next-itservices.firebaseio.com/drivers/"+aid;
 //            var eventRef = new Firebase(url);
 //            var eventInfo = $firebaseArray(eventRef);
 //             for (var i = 0; i < eventInfo.length; i++) {
@@ -238,7 +238,7 @@ IonicApp.factory('Drivers', function ($firebaseArray) {
 
 IonicApp.factory('Vendors', function ($firebaseArray) {
     // Might use a resource here that returns a JSON array
-    var item = new Firebase("https://pickup-dropoff.firebaseio.com/vendors");
+    var item = new Firebase("https://homm-next-itservices.firebaseio.com/vendors");
     // Some fake testing data
     var childs = $firebaseArray(item);
     return {

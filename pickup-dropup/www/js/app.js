@@ -20,7 +20,8 @@ IonicApp.config(function ($ionicCloudProvider) {
   });
 })
 
-IonicApp.run(function ($ionicPlatform) {
+IonicApp.run(function ($ionicPlatform, $ionicPopup) {
+
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -34,6 +35,20 @@ IonicApp.run(function ($ionicPlatform) {
             StatusBar.styleDefault();
         }
     });
+      // Disable BACK button on home
+  $ionicPlatform.registerBackButtonAction(function(event) {
+    if (true) { // your check here
+      $ionicPopup.confirm({
+        title: 'System warning',
+        template: ' are you sure you want to exit?'
+      }).then(function(res) {
+        if (res) {
+          ionic.Platform.exitApp();
+        }
+      })
+    }
+  }, 100);
+
 });
 
 IonicApp.config(function ($stateProvider, $urlRouterProvider) {

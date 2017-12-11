@@ -14,15 +14,11 @@
             <div class="item item-image" style="margin-top: 60px; border: none">
                 <img src="{{the.img}}" class="profile-access" ng-click="modal.show()">
             </div>
-            <div class="list row" style="text-align: 20px">
-                <a class="col" style="text-align: center">
-                Name : <br> {{the.first_name}}  {{the.lastname}}
-             </a>
-                <a class="col" style="text-size: center;text-align: center">
-                Email: <br> {{the.email}}
-             </a>
-                <a class="col" style="text-align: center">
-                Phone: <br> {{the.phone}}
+            <div class="list" style="text-align: center">
+             <a  style="text-align: center">
+                Name :  {{the.first_name| capitalize}}  {{the.lastname| capitalize}}<br>
+                Email:  {{the.email}} <br>
+                Phone:  {{the.phone}}
              </a>
             </div>
             <div class="item item-divider" style=" min-height: 30px;background-color: #f5f5f5;text-align: center;color: #222;font-weight: 500;font-size: 40px;">2016 - 2017<br><br> <img src="http://pudoworld.com/view/uploads/{{currentSch.img}}" class="profile-access2" style="height: 60px; width: auto !important"></div>
@@ -41,8 +37,8 @@
                     <div class="item-remove-animate item-avatar item-icon-right" ng-click="getchild(child.$id)">
                         <img ng-src="{{child.face}}" id="child.$id">
                         <h2>{{child.name}}</h2>
-                        <p style="margin-bottom: 0px;">School : {{child.school}}</p>
-                        <p style="margin-bottom: 0px;">Class : {{child.class}}</p>
+                        <p style="margin-bottom: 0px;">School : {{child.school | capitalize}}</p>
+                        <p style="margin-bottom: 0px;">Class : {{child.class | capitalize}}</p>
                     </div>
                 </ion-item>
             </div>
@@ -50,7 +46,7 @@
         <script id="templates/modal2.html" type="text/ng-template">
             <ion-modal-view ng-init="" style="background: rgba(10, 157, 199, 0.95);">
                 <ion-header-bar class="bar bar-header bar-positive">
-                    <h1 class="title">{{mechild.name}}</h1>
+                    <h1 class="title">{{mechild.name | capitalize}}</h1>
                     <button class="button button-clear button-primary" ng-click="modal2.hide()">Cancel</button>
                 </ion-header-bar>
                 <ion-content class="" style="rgba(250, 250, 250, 0);">
@@ -66,7 +62,7 @@
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view ng-init="" style="background: rgba(10, 157, 199, 0.95);">
                 <ion-header-bar class="bar bar-header bar-positive">
-                    <h1 class="title">Name : <br> {the} {{the.lastname}}</h1>
+                    <h1 class="title">Name : <br>{{the.lastname | capitalize}}</h1>
                     <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
                 </ion-header-bar>
                 <ion-content class="" style="rgba(250, 250, 250, 0);">

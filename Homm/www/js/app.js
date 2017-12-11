@@ -60,24 +60,7 @@ IonicApp.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state('log.access', {
-            url: '/access',
-            views: {
-                'log-access': {
-                    templateUrl: 'templates/access.html',
-                    controller: 'AccessCtrl'
-                }
-            }
-        })
-        .state('log.access-detail', {
-            url: '/access/:schoolId',
-            views: {
-                'log-access': {
-                    templateUrl: 'templates/access-detail.html',
-                    controller: 'AccessDetailCtrl'
-                }
-            }
-        })
+
         // setup an abstract state for the tabs directive
         .state('tab', {
             url: '/tab',

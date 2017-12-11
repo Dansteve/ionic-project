@@ -2,6 +2,9 @@
 .swiper-pagination.swiper-pagination-clickable {
         display: none; !important;
 }
+.bodybackground{
+    background: rgba(194, 194, 194, 0.09);
+}
 .box {
     height: 100% !important;
     width: auto !important;
@@ -11,7 +14,8 @@
 
 .login {
     background-color: #0a9dc7 !important;
-    background: url(../img/login.jpg) !important;
+    background: url(../img/login.jpg) center center no-repeat !important;
+    background-size: cover !important;
 }
 
 .white {
@@ -91,7 +95,7 @@ a#now,
 }
 
 #name {
-    font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
 }
 #child{
     font-family: cursive !important;
@@ -99,8 +103,16 @@ a#now,
 #sidebar{
     background: #fafafa;
 }
+.modal{
+    width: 100% !important;
+     top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+
+}
 .spinner svg {
-     width: 15%;
+    width: 15% !important;
     height: auto;
     stroke: #ff4a4a;
     fill: #0c60ee;
@@ -122,9 +134,11 @@ a#now,
     z-index: 100;
     width: 100%;
 }
+/*
 [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
     background: #387ef5 !important;
 }
+*/
 .center{
     text-align: center !important;
 }

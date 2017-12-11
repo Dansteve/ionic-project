@@ -44,19 +44,15 @@
                 </a>
                 <div id="profile-details">
                   <h2 id="name">{{Loguser.first_name}} {{Loguser.lastname}}</h2>
-                    <p id="child">{{(childs | filter : { parent : Loguser.email}).length}} child( ren )</p>
+                    <p id="child">{{(childs | filter : { parent : Loguser.email}).length}} Task(s)</p>
+                    <p id="child">phone : +234{{Loguser.phone}} </p>
                 </div>
                 <a class="item item-stable" menu-close href="#/tab/dash" >
-                    Track Child
+                    Dashboard
                 </a>
                 <a class="item item-stable" menu-close href="#/tab/chats" >
                     Broadcast
                 </a>
-<!--
-                <a class="item item-stable" menu-close href="#/log/access" >
-                    Access Card
-                </a>
--->
                 <a class="item item-stable" menu-close href="#/tab/account" >
                     Settings
                 </a>

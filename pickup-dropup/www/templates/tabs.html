@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+ | capitalize<ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content>
         <ion-nav-bar class="bar-positive">
             <ion-nav-back-button>
@@ -43,7 +43,7 @@
                   <img src="{{Loguser.img}}" class="profile">
                 </a>
                 <div id="profile-details">
-                  <h2 id="name">{{Loguser.first_name}} {{Loguser.lastname}}</h2>
+                  <h2 id="name">{{Loguser.first_name | capitalize}} {{Loguser.lastname | capitalize}}</h2>
                     <p id="child">{{(childs | filter : { parent : Loguser.email}).length}} child( ren )</p>
                 </div>
                 <a class="item item-stable" menu-close href="#/tab/dash" >

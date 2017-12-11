@@ -47,13 +47,16 @@
                         </ion-header-bar>
                         <ion-content class="padding">
                             <p class="name" id="name">if you've lost your password or wish to reset it,enter email address or phone number to get started. <br><br></p>
-                            <div class="list">
-                                <label class="item item-input">
-                          <input ng-model="newUser.email" type="email" placeholder="Email or Phone number">
+                           <form name="rets" novalidate>
+                               <div class="list">
+                                <label class="item item-input white item-stacked-label" ng-class="{ 'has-error' : rets.email.$invalid && !rets.email.$pristine }">
+                          <input ng-model="passrest" ng-value="passrest" type="email" placeholder="Email">
+                                    <span ng-show="rets.email.$invalid && !rets.email.$pristine" class="help-block">invaild email.</span>
                         </label>
-                                <button class="button button-full button-positive" ng-click="createContact(newUser);modal.hide();">Reset</button>
-                                <button class="button button-full button-stable" ng-click="createContact(newUser);modal.hide();">Cancel</button>
+                                <button class="button button-full button-positive" ng-click="passwordReset(passrest);" ng-disabled="!passrest">Reset</button>
+                                <button class="button button-full button-stable" ng-click="modal.hide();">Cancel</button>
                             </div>
+                    </form>
                         </ion-content>
                     </ion-modal-view>
                 </script>

@@ -11,7 +11,8 @@
 
 .login {
     background-color: #0a9dc7 !important;
-    background: url(../img/login.jpg) !important;
+    background: url(../img/login.jpg) center center no-repeat!important;
+    background-size: cover !important;
 }
 
 .white {
@@ -23,6 +24,10 @@
     height: 200% !important;
 }
 */
+a {
+    font-size: 20px !important;
+    text-decoration: none !important;
+}
 
 .login-padding {
     padding-top: 20% !important;
@@ -91,8 +96,18 @@ a#now,
 }
 
 #name {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
 }
+
+.modal {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    min-height: auto;
+    width: auto;
+}
+
 #child{
     font-family: cursive !important;
 }
@@ -122,9 +137,20 @@ a#now,
     z-index: 100;
     width: 100%;
 }
-[nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
-    background: #387ef5 !important;
+
+.item-divider {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-height: 30px;
+    background-color: #f5f5f5;
+    color: #222;
+    font-weight: 500;
 }
+
+.bodyback{
+    background: #FAFAFA;
+}
+
 .center{
     text-align: center !important;
 }

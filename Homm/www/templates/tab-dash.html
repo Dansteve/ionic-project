@@ -1,5 +1,5 @@
 <ion-view view-title="Dashboard">
-    <ion-content class="" style="background: rgba(56, 126, 245, 0.09);" scroll="false">
+    <ion-content class="bodybackground" scroll="false">
         <div class="list"  scroll="true">
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="child in childs | filter : {parent : Loguser.email} |
   offset: currentPage*itemsPerPage |  limitTo: itemsPerPage" type="item-text-wrap" ng-href="#/tab/dash/{{child.$id}}" ng-class-even="'item-stable'" ng-if="child.approve">
@@ -15,6 +15,7 @@
         </div>
 <!--        <div class="center" style="padding: 20px; font-size: 20px"> Loading list </div>-->
 
+<!--
     <div class="bar bar-footer bar-positive pagination">
         <ul style="display: inline-block;width: 100%">
             <li  ng-class="prevPageDisabled()" style="display: inline-block;padding: 6px;font-size: 17px;">
@@ -28,6 +29,7 @@
             </li>
         </ul>
     </div>
+-->
     </ion-content>
 
 </ion-view>
